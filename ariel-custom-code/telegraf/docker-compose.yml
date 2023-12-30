@@ -1,0 +1,56 @@
+version: '3.6'							# Version of docker-compose file
+
+
+networks:
+  default:
+    name: opentelemetry-demo
+    driver: bridge
+    external: true
+services:							    # Individual docker services for TIG
+  telegraf:							    # telegraf service configuration	
+    image: telegraf								
+    container_name: telegraf
+    restart: always                     # Restarts automatically if it crashes
+    volumes:
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro  # Mounts telegraf.conf into the container
+#    depends_on:						    # Waits until influxdb service is running
+#      - influxdb
+#    links:								# Connects this service to influxdb service
+#      - influxdb
+    ports:								# Maps port 57100 on host to container.
+    - '57100:57100'
+       
+#  influxdb:								# influxdb service configuration
+#    image: influxdb:1.8-alpine
+#    container_name: influxdb
+#    restart: always
+#    environment:						# To create a database, user and password.
+#      - INFLUXDB_DB=
+#      - INFLUXDB_ADMIN_USER=
+#      - INFLUXDB_ADMIN_PASSWORD=
+#    ports:
+#      - '8086:8086'
+#    volumes:
+#      - influxdb_data:/var/lib/influxdb
+
+#  grafana:								# grafana service configuration
+#    image: grafana/grafana
+#    container_name: grafana-server
+#    restart: always						# Restarts automatically if it crashes
+#    depends_on:
+#      - influxdb
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=admin
+#      - GF_SECURITY_ADMIN_PASSWORD=admin
+#      - GF_INSTALL_PLUGINS=
+#    links:
+#      - influxdb
+#    ports:
+#      - '3000:3000'
+#    volumes:
+#      - grafana_data:/var/lib/grafana
+
+# volumes:								# To store data persistently on the host
+#  grafana_data: {}									 
+#  influxdb_data: {}
+
