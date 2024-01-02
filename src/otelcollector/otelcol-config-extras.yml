@@ -22,19 +22,19 @@ receivers:
     version: v2c
     community: public
 
-    resource_attributes:
-      resource_attr.name.1:
-        indexed_value_prefix: probe
+  #  resource_attributes:
+  #    resource_attr.name.1:
+  #      indexed_value_prefix: probe
 
-    metrics:
-      snmp_cpu_user:
-        unit: "By"
-        gauge:
-          value_type: int
-        column_oids:
-          - oid: "1.3.6.1.4.1.2021.11.9"
-            resource_attributes:
-              - resource_attr.name.1
+  #  metrics:
+  #    snmp_cpu_user:
+  #      unit: "By"
+  #      gauge:
+  #        value_type: int
+  #      column_oids:
+  #        - oid: "1.3.6.1.4.1.2021.11.9"
+  #          resource_attributes:
+  #            - resource_attr.name.1
   syslog:
     udp:
       listen_address: "0.0.0.0:1514"
