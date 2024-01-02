@@ -123,7 +123,7 @@ service:
       processors: [filter/ottl, transform, batch]
       exporters: [prometheusremotewrite, otlphttp/prometheus, debug]
     logs:
-      receivers: [otlp]
+      receivers: [otlp, syslog]
       processors: [batch]
       exporters: [otlp/logs, debug, logzio/logs]
       
