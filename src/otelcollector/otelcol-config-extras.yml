@@ -44,6 +44,9 @@ receivers:
       - type: move
         from: attributes.message
         to: body
+      - type: add
+        field: attributes.log.source
+        value: syslog
 ...
 exporters:
 
