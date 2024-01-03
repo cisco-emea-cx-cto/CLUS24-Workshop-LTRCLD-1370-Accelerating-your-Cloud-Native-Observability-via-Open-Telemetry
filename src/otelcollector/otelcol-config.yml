@@ -35,18 +35,18 @@ receivers:
   #        - oid: "1.3.6.1.4.1.2021.11.9"
   #          resource_attributes:
   #            - resource_attr.name.1
-  syslog:
-    udp:
-      listen_address: "0.0.0.0:1514"
-    protocol: rfc3164
+#  syslog:
+#    udp:
+#      listen_address: "0.0.0.0:1514"
+#    protocol: rfc3164
 #    location: UTC
-    operators:
-      - type: move
-        from: attributes.message
-        to: body
-      - type: add
-        field: attributes.log.source
-        value: syslog
+#    operators:
+#      - type: move
+#        from: attributes.message
+#        to: body
+#      - type: add
+#        field: attributes.log.source
+#        value: syslog
      
 exporters:
 
@@ -127,7 +127,7 @@ service:
       processors: [filter/ottl, transform, batch]
       exporters: [prometheusremotewrite, otlphttp/prometheus, debug]
     logs:
-      receivers: [otlp, syslog]
+      receivers: [otlp]
       processors: [batch]
       exporters: [otlp/logs, debug, logzio/logs]
       
