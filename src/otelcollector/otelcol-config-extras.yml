@@ -39,7 +39,7 @@ receivers:
     udp:
       listen_address: "0.0.0.0:1514"
     protocol: rfc3164
-    location: UTC
+#    location: UTC
     operators:
       - type: move
         from: attributes.message
@@ -47,7 +47,7 @@ receivers:
       - type: add
         field: attributes.log.source
         value: syslog
-...
+     
 exporters:
 
   logzio/traces:
