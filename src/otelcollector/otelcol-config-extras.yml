@@ -3,6 +3,7 @@ receivers:
     collection_interval: 60s
     endpoint: udp://172.24.79.29:161
     version: v2c
+    community: public
 #    security_level: auth_priv
 #    user: collector_user
 #    auth_type: "MD5"
