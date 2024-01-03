@@ -730,6 +730,7 @@ services:
   
   dataprepper:
     image: opensearchproject/data-prepper:latest
+    container_name: dataprepper
     volumes:
       - ./src/opensearch/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
       - ./src/opensearch/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
