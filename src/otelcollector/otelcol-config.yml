@@ -52,6 +52,14 @@ connectors:
   spanmetrics:
 
 service:
+
+  telemetry:
+    logs:
+      level: "error"
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
+
   pipelines:
     traces:
       receivers: [otlp]
@@ -65,3 +73,5 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [otlp/logs, debug]
+
+
