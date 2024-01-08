@@ -1,1 +1,17 @@
-#
+receivers:
+  hostmetrics:
+    collection_interval: 30s
+    scrapers:
+      cpu:
+      memory:
+
+  hostmetrics/disk:
+    collection_interval: 1m
+    scrapers:
+      disk:
+      filesystem:
+
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics, hostmetrics/disk]
