@@ -640,6 +640,7 @@ services:
     volumes:
       - ./src/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./src/grafana/provisioning/:/etc/grafana/provisioning/
+      - grafana-data:/var/lib/grafana
     ports:
       - "${GRAFANA_SERVICE_PORT}:${GRAFANA_SERVICE_PORT}"
     logging: *logging
@@ -898,4 +899,6 @@ services:
 
 volumes:
  opensearch-data:
+    driver: local
+ grafana-data:
     driver: local
