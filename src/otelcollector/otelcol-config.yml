@@ -50,6 +50,7 @@ receivers:
           - /dev/*
           - /proc/*
           - /sys/*
+          - /run/docker/*
           - /run/k3s/containerd/*
           - /var/lib/docker/*
           - /var/lib/kubelet/*
@@ -147,7 +148,7 @@ service:
       processors: [filter/ottl, transform, batch]
       exporters: [otlphttp/prometheus, debug]
     logs:
-      receivers: [otlp]
+      receivers: [otlp, syslog]
       processors: [batch]
       exporters: [otlp/logs, debug]
 
