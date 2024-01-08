@@ -94,8 +94,10 @@ receivers:
   otlp:
     protocols:
       grpc:
+        include_metadata: true
         endpoint: 0.0.0.0:4317
       http:
+        include_metadata: true
         endpoint: 0.0.0.0:4318
         cors:
           allowed_origins:
@@ -113,7 +115,7 @@ exporters:
   
   otlp:
     sending_queue:
-      enabled: false
+      enabled: true
     endpoint: "jaeger:4317"
     tls:
       insecure: true
@@ -128,6 +130,9 @@ exporters:
 
 processors:
   batch:
+    timeout: 10s
+    send_batch_size: 10000
+    send_batch_max_size: 11000
   filter/ottl:
     error_mode: ignore
     metrics:
