@@ -716,6 +716,8 @@ services:
     ports:
       - "9200:9200"
       - 9600:9600 # required for Performance Analyzer
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data    
     logging: *logging
 
   opensearch-dashboards:
@@ -893,3 +895,7 @@ services:
       retries: 60
     ports:
       - 5432
+
+volumes:
+ opensearch-data:
+    driver: local
