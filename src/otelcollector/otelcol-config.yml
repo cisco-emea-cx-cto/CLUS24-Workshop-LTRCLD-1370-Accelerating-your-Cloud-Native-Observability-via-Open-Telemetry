@@ -68,13 +68,13 @@ receivers:
       listen_address: "0.0.0.0:1514"
     protocol: rfc3164
     location: UTC
-    operators:
-      - type: syslog_input
-        udp:
-           listen_adress: "0.0.0.0:1514"
-        syslog:
-            protocol: rfc3164
-            location: UTC
+#    operators:
+#      - type: syslog_input
+#        udp:
+#           listen_adress: "0.0.0.0:1514"
+#        syslog:
+#            protocol: rfc3164
+#            location: UTC
 
 #      - type: syslog_parser
 #        protocol: rfc3164
