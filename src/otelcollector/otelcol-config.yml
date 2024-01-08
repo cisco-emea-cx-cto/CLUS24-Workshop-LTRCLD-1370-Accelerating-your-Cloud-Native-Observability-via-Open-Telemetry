@@ -62,6 +62,18 @@ receivers:
       paging:
       processes:
 
+  syslog:
+    udp:
+      listen_address: "0.0.0.0:1514"
+    protocol: rfc3164
+    location: UTC
+    operators:
+      - type: move
+        from: attributes.message
+        to: body
+      - type: add
+        field: attributes.log.source
+        value: syslog
   otlp:
     protocols:
       grpc:
