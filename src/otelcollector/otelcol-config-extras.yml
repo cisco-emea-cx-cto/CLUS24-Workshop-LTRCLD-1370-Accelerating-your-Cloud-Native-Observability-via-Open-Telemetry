@@ -19,6 +19,12 @@ exporters:
       insecure: true
 
 service:
+  telemetry:
+    logs:
+      level: "error"
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
   pipelines:
     metrics/infra-tel:
       receivers: [hostmetrics, hostmetrics/disk]
