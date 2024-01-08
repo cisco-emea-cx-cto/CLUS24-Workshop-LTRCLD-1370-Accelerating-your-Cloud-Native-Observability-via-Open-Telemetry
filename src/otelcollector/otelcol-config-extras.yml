@@ -15,3 +15,5 @@ service:
   pipelines:
     metrics/infra-tel:
       receivers: [hostmetrics, hostmetrics/disk]
+#      processors: [filter/ottl, transform, batch]
+      exporters: [otlphttp/prometheus, debug]
