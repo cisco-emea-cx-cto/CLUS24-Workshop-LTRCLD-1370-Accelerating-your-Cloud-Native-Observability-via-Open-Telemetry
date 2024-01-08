@@ -69,12 +69,19 @@ receivers:
     protocol: rfc3164
     location: UTC
     operators:
-      - type: move
-        from: attributes.message
-        to: body
-      - type: add
-        field: attributes.log.source
-        value: syslog
+      - type: syslog_parser
+        protocol: rfc3164
+        parse_from: body
+        parse_to: body
+      - type: remove
+        field: attributes    
+#    operators:
+#      - type: move
+#        from: attributes.message
+#        to: body
+#      - type: add
+#        field: attributes.log.source
+#        value: syslog
   otlp:
     protocols:
       grpc:
