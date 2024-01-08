@@ -5,13 +5,10 @@
 receivers:
   hostmetrics:
     collection_interval: 30s
+    root_path: /hostfs
     scrapers:
       cpu:
       memory:
-
-  hostmetrics/disk:
-    collection_interval: 1m
-    scrapers:
       disk:
       filesystem:
 
@@ -84,7 +81,7 @@ service:
       processors: [batch]
       exporters: [otlp, debug, spanmetrics]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, hostmetrics, hostmetrics/disk]
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, hostmetrics]
       processors: [filter/ottl, transform, batch]
       exporters: [otlphttp/prometheus, debug]
     logs:
