@@ -4,13 +4,17 @@
 
 receivers:
   hostmetrics:
-    collection_interval: 30s
+    collection_interval: 60s
     root_path: /hostfs
     scrapers:
       cpu:
+      load:
       memory:
       disk:
       filesystem:
+      network:
+      paging:
+      processes:
 
   otlp:
     protocols:
