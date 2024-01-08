@@ -82,7 +82,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
+        "w": 9,
         "x": 0,
         "y": 1
       },
@@ -110,10 +110,11 @@
             "uid": "webstore-metrics"
           },
           "editorMode": "code",
-          "exemplar": false,
+          "exemplar": true,
           "expr": "system_memory_utilization_ratio{state=\"used\"}",
           "format": "time_series",
           "instant": false,
+          "interval": "",
           "legendFormat": "{{job}} ",
           "range": true,
           "refId": "A"
@@ -159,8 +160,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 6,
+        "w": 8,
+        "x": 9,
         "y": 1
       },
       "id": 9,
@@ -174,7 +175,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "text": {
+          "titleSize": 10
+        }
       },
       "pluginVersion": "10.1.2",
       "targets": [
@@ -229,8 +233,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
+        "w": 7,
+        "x": 17,
         "y": 1
       },
       "id": 20,
@@ -1473,7 +1477,7 @@
       "type": "row"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
@@ -1509,13 +1513,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2024-01-08T04:30:24.175Z",
+    "to": "2024-01-08T08:30:24.175Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Otel - Node",
   "uid": "OiEkUDsVk",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
