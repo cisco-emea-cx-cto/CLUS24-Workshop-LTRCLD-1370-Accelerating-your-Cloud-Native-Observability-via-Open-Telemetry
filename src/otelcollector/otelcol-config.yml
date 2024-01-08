@@ -113,6 +113,8 @@ exporters:
     sampling_thereafter: 200
   
   otlp:
+    sending_queue:
+      enabled: false
     endpoint: "jaeger:4317"
     tls:
       insecure: true
