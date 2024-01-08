@@ -65,7 +65,7 @@ receivers:
   syslog:
     udp:
       listen_address: "0.0.0.0:1514"
-    protocol: rfc3164
+    protocol: rfc5424
     location: UTC
     operators:
       - type: move
