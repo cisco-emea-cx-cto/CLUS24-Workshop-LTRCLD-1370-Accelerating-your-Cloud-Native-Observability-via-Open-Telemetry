@@ -11,6 +11,13 @@ receivers:
       disk:
       filesystem:
 
+exporters:
+  debug:
+  otlphttp/prometheus:
+    endpoint: "http://prometheus:9090/api/v1/otlp"
+    tls:
+      insecure: true
+
 service:
   pipelines:
     metrics/infra-tel:
