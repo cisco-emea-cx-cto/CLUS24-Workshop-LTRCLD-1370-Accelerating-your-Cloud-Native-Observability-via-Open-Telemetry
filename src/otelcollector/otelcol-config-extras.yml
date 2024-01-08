@@ -13,5 +13,5 @@ receivers:
 
 service:
   pipelines:
-    metrics:
+    metrics/infra-tel:
       receivers: [hostmetrics, hostmetrics/disk]
