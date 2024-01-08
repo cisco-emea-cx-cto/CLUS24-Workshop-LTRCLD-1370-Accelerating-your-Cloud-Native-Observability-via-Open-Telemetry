@@ -646,7 +646,7 @@ services:
 
   # OpenTelemetry Collector
   otelcol:
-    image: otel/opentelemetry-collector-contrib:latest  ##changes from :0.86.0 to latest    
+    image: otel/opentelemetry-collector-contrib:0.91.0  ##changes from :0.86.0 to latest    
     container_name: otel-col
     deploy:
       resources:
@@ -671,7 +671,7 @@ services:
 
   # Prometheus
   prometheus:
-    image: quay.io/prometheus/prometheus:v2.47.0
+    image: quay.io/prometheus/prometheus:v2.48.1
     container_name: prometheus
     command:
       - --web.console.templates=/etc/prometheus/consoles
@@ -713,29 +713,28 @@ services:
         hard: 65536
     ports:
       - "9200:9200"
-      - 9600:9600 # required for Performance Analyzer
+#      - 9600:9600 # required for Performance Analyzer
     logging: *logging
 
-  opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:2.3.0
-    container_name: opensearch-dashboards
-    hostname: "opensearch-dashboard"
-    ports:
-      - 5601:5601
-    expose:
-      - "5601"
-    environment:
-      - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
-      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" # disables security dashboards plugin in OpenSearch Dashboards
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:2.3.0
+#    container_name: opensearch-dashboards
+#    hostname: "opensearch-dashboard"
+#    ports:
+#      - 5601:5601
+#    expose:
+#      - "5601"
+#    environment:
+#      - 'OPENSEARCH_HOSTS=["http://opensearch:9200"]'
+#      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true" # disables security dashboards plugin in OpenSearch Dashboards
   
   dataprepper:
     image: opensearchproject/data-prepper:latest
-    container_name: dataprepper
     volumes:
       - ./src/opensearch/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
       - ./src/opensearch/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml
     ports:
-      - "21892:21892"
+      - "21892"
     logging: *logging
 
   # *****
