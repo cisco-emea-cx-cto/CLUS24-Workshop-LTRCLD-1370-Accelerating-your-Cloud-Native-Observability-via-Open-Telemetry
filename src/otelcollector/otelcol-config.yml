@@ -167,7 +167,7 @@ service:
       processors: [batch]
       exporters: [otlp, debug, spanmetrics]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, hostmetrics]
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics] #hostmetrics
       processors: [filter/ottl, transform, batch]
       exporters: [otlphttp/prometheus, debug]
     logs:
