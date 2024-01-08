@@ -3,6 +3,18 @@
 
 
 receivers:
+  hostmetrics:
+    collection_interval: 30s
+    scrapers:
+      cpu:
+      memory:
+
+  hostmetrics/disk:
+    collection_interval: 1m
+    scrapers:
+      disk:
+      filesystem:
+
   otlp:
     protocols:
       grpc:
@@ -72,7 +84,7 @@ service:
       processors: [batch]
       exporters: [otlp, debug, spanmetrics]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics]
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, hostmetrics, hostmetrics/disk]
       processors: [filter/ottl, transform, batch]
       exporters: [otlphttp/prometheus, debug]
     logs:
