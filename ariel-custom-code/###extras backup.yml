@@ -95,10 +95,7 @@ exporters:
     account_token: "ZSqeoxVrRhzPFgPJcZpBcdFjuaOhewaz"
     region: "us-east-1"
 
-  debug:
-    verbosity: detailed
-    sampling_initial: 5
-    sampling_thereafter: 200
+
   otlp:
     endpoint: "jaeger:4317"
     tls:
@@ -111,6 +108,7 @@ exporters:
     endpoint: "http://prometheus:9090/api/v1/otlp"
     tls:
       insecure: true
+      
 #    endpoint: "0.0.0.0:8889"
 #    resource_to_telemetry_conversion:
 #      enabled: true
@@ -118,6 +116,10 @@ exporters:
 #    const_labels:
 #      job_name: otel-collector
 
+  debug:
+    verbosity: detailed
+    sampling_initial: 5
+    sampling_thereafter: 200
 processors:
   batch:
     send_batch_size: 10000
