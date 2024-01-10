@@ -64,7 +64,7 @@ receivers:
 
   snmp:
     collection_interval: 60s
-    endpoint: udp://snmpd:161
+    endpoint: udp://172.24.79.29:161
     version: v3
     security_level: auth_priv
     user: collector_user
