@@ -96,9 +96,9 @@ receivers:
         unit: "1"
         gauge:
           value_type: int
-        scalar_oids:
+        column_oids:
           - oid: "1.3.6.1.2.1.2.2.1.7"
-              
+
       ifInOctets:
           description: "Incoming octets"
           unit: "By"
