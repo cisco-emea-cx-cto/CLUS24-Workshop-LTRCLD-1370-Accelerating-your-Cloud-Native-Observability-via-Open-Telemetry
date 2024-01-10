@@ -76,8 +76,29 @@ receivers:
     resource_attributes:
       resource_attr.name.1:
         indexed_value_prefix: probe
+      resource_attr.name.2:
+        oid: "1.1.1.1"
+
+    attributes:
+      attr.name.1:
+        value: a2_new_key
+        enum:
+          - in
+          - out
+      attr.name.2:
+        indexed_value_prefix: device
+      attr.name.3:
+        oid: "2.2.2.2"
 
     metrics:
+      ifAdminStatus:
+        description: "Administrative status of the interface"
+        unit: "1"
+        gauge:
+          value_type: int
+        scalar_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.7"
+              
       ifInOctets:
           description: "Incoming octets"
           unit: "By"
