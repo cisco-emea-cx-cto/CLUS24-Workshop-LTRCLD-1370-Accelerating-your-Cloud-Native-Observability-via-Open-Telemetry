@@ -111,6 +111,19 @@ exporters:
     tls:
       insecure: true
 
+  logzio/traces:
+    account_token: "VLVEzMUQWgZFCnobKvvkAoFBLGjnZhQV"
+    region: "us-east-1"
+
+  prometheusremotewrite:
+    endpoint: "https://listener.logz.io:8053"
+    headers:
+      Authorization: "Bearer JIySQTwXbjxqPjBYyNHmSoytvZPGAwql"
+
+  logzio/logs:
+    account_token: "ZSqeoxVrRhzPFgPJcZpBcdFjuaOhewaz"
+    region: "us-east-1"
+
 processors:
   batch:
     timeout: 10s
@@ -148,14 +161,14 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, debug, spanmetrics]
+      exporters: [otlp, debug, spanmetrics, logzio/logs, logzio/traces]
     metrics:
       receivers: [httpcheck/frontendproxy, otlp, spanmetrics] #hostmetrics
       processors: [filter/ottl, transform, batch]
-      exporters: [otlphttp/prometheus, debug]
+      exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
       receivers: [otlp, syslog]
       processors: [batch]
-      exporters: [otlp/logs, debug]
+      exporters: [otlp/logs, debug, logzio/logs]
 
 
