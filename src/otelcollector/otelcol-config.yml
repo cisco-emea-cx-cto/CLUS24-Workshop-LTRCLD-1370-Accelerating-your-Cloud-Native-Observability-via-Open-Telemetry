@@ -195,7 +195,7 @@ connectors:
   spanmetrics:
 
 service:
-
+  extensions: [health_check]
   telemetry:
     logs:
       level: "error"
@@ -218,3 +218,5 @@ service:
       exporters: [otlp/logs, debug, logzio/logs]
 
 
+extensions:
+  health_check:
