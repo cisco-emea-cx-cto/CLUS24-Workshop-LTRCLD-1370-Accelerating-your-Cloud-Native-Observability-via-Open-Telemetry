@@ -667,7 +667,7 @@ services:
       - "1514:1514/udp"          # Syslog receiver
 #      - "1514:1514/tcp"          # Syslog receiver
       - "13133:13133"            #OTLP Healthcheck
-      - "55679:55679"
+      - "55679:55679"            #OTLP Zpages
     depends_on:
       - jaeger
     logging: *logging
