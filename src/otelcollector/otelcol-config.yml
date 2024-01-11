@@ -67,13 +67,14 @@ receivers:
     endpoint: udp://172.24.79.29:161
     version: v2c
     community: public
-    resource_attributes:
-      ifIndex:
-        description: "A unique value for each interface"
-        oid: "1.3.6.1.2.1.2.2.1.1"
-      ifName:
-        description: "The name of the interface"
-        oid: "1.3.6.1.2.1.31.1.1.1.1" # Replace with the correct OID for ifName
+#    resource_attributes:
+#      ifIndex:
+#        description: "A unique value for each interface"
+#        oid: "1.3.6.1.2.1.2.2.1.1"
+#      ifName:
+#        description: "The name of the interface"
+#        oid: "1.3.6.1.2.1.31.1.1.1.1" # Replace with the correct OID for ifName
+
     metrics:
       ifAdminStatus:
         description: "The desired state of the interface"
@@ -82,7 +83,13 @@ receivers:
           value_type: int
         column_oids:
           - oid: "1.3.6.1.2.1.2.2.1.7"
-            resource_attributes: [ifIndex, ifName]
+            attributes:
+              - name: ifIndex
+                from_oid: "1.3.6.1.2.1.2.2.1.1"
+              - name: ifName
+                from_oid: "1.3.6.1.2.1.31.1.1.1.1"
+
+
 
   syslog:
     udp:
