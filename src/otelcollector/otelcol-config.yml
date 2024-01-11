@@ -75,6 +75,13 @@ receivers:
 #        description: "The name of the interface"
 #        oid: "1.3.6.1.2.1.31.1.1.1.1" # Replace with the correct OID for ifName
 
+
+    attributes:
+      ifIndex:
+        oid: "1.3.6.1.2.1.2.2.1.1"
+      ifName:
+        oid: "1.3.6.1.2.1.31.1.1.1.1"
+
     metrics:
       ifAdminStatus:
         description: "The desired state of the interface"
