@@ -195,7 +195,7 @@ connectors:
   spanmetrics:
 
 service:
-  extensions: [health_check]
+  extensions: [health_check, zpages]
   telemetry:
     logs:
       level: "error"
@@ -220,3 +220,4 @@ service:
 
 extensions:
   health_check:
+  zpages:
