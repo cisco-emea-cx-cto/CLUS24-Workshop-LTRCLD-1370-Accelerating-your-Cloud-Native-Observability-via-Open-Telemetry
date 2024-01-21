@@ -654,13 +654,19 @@ services:
         limits:
           memory: 125M
     restart: unless-stopped
-    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-config-extras.yml" ]
+#    command: [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-config-extras.yml" ]
     volumes:
       - ./src/otelcollector/otelcol-config.yml:/etc/otelcol-config.yml
       - ./src/otelcollector/otelcol-config-extras.yml:/etc/otelcol-config-extras.yml
       - /:/hostfs
       - /var/run/docker.sock:/var/run/docker.sock ##for docker metrics receiver 
-  # entrypoint: /entrypoint.sh
+    user: root
+    command: >
+      sh -c '
+        addgroup --gid 973 dockergroup &&
+        adduser oteluser dockergroup &&
+        [ "--config=/etc/otelcol-config.yml", "--config=/etc/otelcol-config-extras.yml" ]
+      '
     ports:
       - "4317:4317"          # OTLP over gRPC receiver
       - "4318:4318"          # OTLP over HTTP receiver
