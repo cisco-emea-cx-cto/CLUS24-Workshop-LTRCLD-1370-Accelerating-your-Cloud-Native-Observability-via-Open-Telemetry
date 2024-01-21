@@ -1,0 +1,79 @@
+receivers:
+  filelog/localhost_linux_system:
+    include:
+      - /var/log/*.log
+    include_file_path: true
+    operators:
+      - type: move
+        from: attributes["log.file.name"]
+        to: attributes["log_file_name"]
+      - type: move
+        from: attributes["log.file.path"]
+        to: attributes["log_file_path"]
+    attributes:
+      type: agent-linux
+  hostmetrics/localhost_linux_system:
+    collection_interval: 15s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      disk:
+      load:
+      filesystem:
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      network:
+      paging:
+      process:
+        exclude:
+          names: ['launcher']
+          match_type: strict
+        mute_process_name_error: true
+        mute_process_exe_error: true
+        mute_process_io_error: true
+processors:
+  resourcedetection/system:
+    detectors: ["system"]
+    system:
+      hostname_sources: ["os"]
+  resource/agent:
+    attributes:
+      - key: logzio_agent_version
+        value: v1.1.21
+        action: upsert
+  filter:
+    metrics:
+      include:
+        match_type: strict
+        metric_names: ["system.cpu.time", "system.cpu.load_average.1m", "system.cpu.load_average.5m", "system.cpu.load_average.15m", "system.cpu.utilization", "system.memory.usage", "system.memory.utilization", "system.filesystem.usage", "system.disk.io", "system.disk.io_time", "system.disk.operation_time", "system.network.connections", "system.network.io", "system.network.packets", "system.network.errors", "process.cpu.time", "process.memory.usage", "process.disk.io", "process.memory.usage", "process.memory.virtual"]
+exporters:
+  logging:
+  logzio/logs:
+    account_token: FKgUhAUqSXyJUqQWSXBtZgcjgqBIEUDg
+    region: us
+  prometheusremotewrite:
+    endpoint: https://listener.logz.io:8053
+    headers:
+      Authorization: Bearer qdlRBBOKErlvkeAqcsJyEPRXYOdCfpuw
+    resource_to_telemetry_conversion:
+      enabled: true
+service:
+  pipelines:
+    logs:
+      receivers:
+        - filelog/localhost_linux_system
+      processors:
+        - resourcedetection/system
+      exporters: [logzio/logs]
+    metrics:
+      receivers:
+        - hostmetrics/localhost_linux_system
+      processors:
+        - resourcedetection/system
+        - resource/agent
+        - filter
+      exporters: [prometheusremotewrite]
