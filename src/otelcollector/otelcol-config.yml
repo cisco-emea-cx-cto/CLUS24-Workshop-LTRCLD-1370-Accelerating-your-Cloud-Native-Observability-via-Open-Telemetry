@@ -1,6 +1,27 @@
 # Copyright The OpenTelemetry Authors
 # SPDX-License-Identifier: Apache-2.0
 receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
+  docker_stats:
+    endpoint: unix:///var/run/docker.sock
+    collection_interval: 30s
+    timeout: 20s
+    api_version: 1.24
+#    container_labels_to_metric_labels:
+#      my.container.label: my-metric-label
+#      my.other.container.label: my-other-metric-label
+#    env_vars_to_metric_labels:
+#      MY_ENVIRONMENT_VARIABLE: my-metric-label
+#      MY_OTHER_ENVIRONMENT_VARIABLE: my-other-metric-label
+#    excluded_images:
+#      - undesired-container
+#      - /.*undesired.*/
+#      - another-*-container
+    metrics: 
+      container.cpu.usage.percpu:
+        enabled: true
+      container.network.io.usage.tx_dropped:
+        enabled: false
+
   filelog/localhost_linux_system:
     include:
       - /var/log/*.log
@@ -266,7 +287,7 @@ service:
       processors: [batch, resourcedetection/system]
       exporters: [otlp, debug, spanmetrics, logzio/logs, logzio/traces]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system] 
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system, docker_stats] 
       processors: [filter/ottl, transform, batch, resourcedetection/system, resource/agent]
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
