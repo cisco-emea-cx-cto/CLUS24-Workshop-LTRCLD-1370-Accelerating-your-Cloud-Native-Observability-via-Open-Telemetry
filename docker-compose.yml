@@ -660,7 +660,7 @@ services:
       - ./src/otelcollector/otelcol-config-extras.yml:/etc/otelcol-config-extras.yml
       - /:/hostfs
       - /var/run/docker.sock:/var/run/docker.sock ##for docker metrics receiver 
-    user: root
+    user: 1001
     command: >
       sh -c '
         addgroup --gid 973 dockergroup &&
