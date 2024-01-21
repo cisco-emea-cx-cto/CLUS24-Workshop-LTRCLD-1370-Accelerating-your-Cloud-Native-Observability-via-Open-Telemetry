@@ -1,67 +1,44 @@
 # Copyright The OpenTelemetry Authors
 # SPDX-License-Identifier: Apache-2.0
 receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
-  hostmetrics:
-    collection_interval: 60s
-    root_path: /hostfs
+  filelog/localhost_linux_system:
+    include:
+      - /var/log/*.log
+    include_file_path: true
+    operators:
+      - type: move
+        from: attributes["log.file.name"]
+        to: attributes["log_file_name"]
+      - type: move
+        from: attributes["log.file.path"]
+        to: attributes["log_file_path"]
+    attributes:
+      type: agent-linux
+  hostmetrics/localhost_linux_system:
+    collection_interval: 15s
     scrapers:
       cpu:
         metrics:
           system.cpu.utilization:
             enabled: true
-      load: null
+      disk:
+      load:
+      filesystem:
       memory:
         metrics:
           system.memory.utilization:
             enabled: true
-      disk: null
-      filesystem:
-        exclude_fs_types:
-          fs_types:
-          - autofs
-          - binfmt_misc
-          - bpf
-          - cgroup2
-          - configfs
-          - debugfs
-          - devpts
-          - devtmpfs
-          - fusectl
-          - hugetlbfs
-          - iso9660
-          - mqueue
-          - nsfs
-          - overlay
-          - proc
-          - procfs
-          - pstore
-          - rpc_pipefs
-          - securityfs
-          - selinuxfs
-          - squashfs
-          - sysfs
-          - tracefs
-          match_type: strict
-        exclude_mount_points:
-          match_type: regexp
-          mount_points:
-          - /dev/*
-          - /proc/*
-          - /sys/*
-          - /run/docker/*
-          - /run/k3s/containerd/*
-          - /var/lib/docker/*
-          - /var/lib/kubelet/*
-          - /snap/*
-        metrics:
-          system.filesystem.utilization:
-            enabled: true
-
-      network: null
+      network:
       paging:
-      processes:
       process:
+        exclude:
+          names: ['launcher']
+          match_type: strict
+        mute_process_name_error: true
+        mute_process_exe_error: true
+        mute_process_io_error: true
 
+### old hostmetrics configuration
 #  hostmetrics:
 #    collection_interval: 60s
 #    root_path: /hostfs
@@ -80,7 +57,7 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
 #        exclude_fs_types:
 #          fs_types:
 #          - autofs
-#          - binfmt_misc
+#         - binfmt_misc
 #          - bpf
 #          - cgroup2
 #          - configfs
@@ -103,7 +80,7 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
 #          - sysfs
 #          - tracefs
 #          match_type: strict
-##        exclude_mount_points:
+#        exclude_mount_points:
 #          match_type: regexp
 #          mount_points:
 #          - /dev/*
@@ -117,10 +94,11 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
 #        metrics:
 #          system.filesystem.utilization:
 #            enabled: true
-#
+
 #      network: null
 #      paging:
 #      processes:
+#      process:
 
   snmp:
     collection_interval: 60s
@@ -225,17 +203,34 @@ exporters:
     endpoint: "https://listener.logz.io:8053"
     headers:
       Authorization: "Bearer qdlRBBOKErlvkeAqcsJyEPRXYOdCfpuw"
+# should we add? this came from the hostmetrics of logz.io    resource_to_telemetry_conversion:
+#      enabled: true    
+  
 
   logzio/logs:
     account_token: "FKgUhAUqSXyJUqQWSXBtZgcjgqBIEUDg"
     region: "us-east-1"
 
 processors:
+  resourcedetection/system:
+    detectors: ["system"]
+    system:
+      hostname_sources: ["os"]
+  resource/agent:
+    attributes:
+      - key: logzio_agent_version
+        value: v1.1.21
+        action: upsert
+  filter:
+    metrics:
+      include:
+        match_type: strict
+        metric_names: ["system.cpu.time", "system.cpu.load_average.1m", "system.cpu.load_average.5m", "system.cpu.load_average.15m", "system.cpu.utilization", "system.memory.usage", "system.memory.utilization", "system.filesystem.usage", "system.disk.io", "system.disk.io_time", "system.disk.operation_time", "system.network.connections", "system.network.io", "system.network.packets", "system.network.errors", "process.cpu.time", "process.memory.usage", "process.disk.io", "process.memory.usage", "process.memory.virtual"]
   batch:
     timeout: 10s
     send_batch_size: 10000
     send_batch_max_size: 11000
-  filter/ottl:
+  filter/ottl: ###does this overlap with the other filter?
     error_mode: ignore
     metrics:
       metric:
@@ -266,14 +261,14 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [batch, resourcedetection/system]
       exporters: [otlp, debug, spanmetrics, logzio/logs, logzio/traces]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics] 
-      processors: [filter/ottl, transform, batch]
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system] 
+      processors: [filter/ottl, transform, batch, resourcedetection/system, resource/agent]
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
-      receivers: [otlp, syslog]
+      receivers: [otlp, syslog, filelog/localhost_linux_system]
       processors: [batch]
       exporters: [otlp/logs, debug, logzio/logs]
 
