@@ -660,6 +660,7 @@ services:
       - ./src/otelcollector/otelcol-config-extras.yml:/etc/otelcol-config-extras.yml
       - /:/hostfs
       - /var/run/docker.sock:/var/run/docker.sock ##for docker metrics receiver 
+    entrypoint: /entrypoint.sh
     ports:
       - "4317:4317"          # OTLP over gRPC receiver
       - "4318:4318"          # OTLP over HTTP receiver
