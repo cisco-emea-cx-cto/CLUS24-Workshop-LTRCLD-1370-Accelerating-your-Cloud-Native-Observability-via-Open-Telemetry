@@ -12,3 +12,13 @@ providers:
     editable: true
     options:
       path: /etc/grafana/provisioning/dashboards/demo
+
+#  - name: 'OpenTelemetry Demo Cisco'
+#    orgId: 1
+#    folder: 'cisco'
+#    type: file
+#    disableDeletion: false
+#    editable: true
+#    options:
+#      path: /etc/grafana/provisioning/dashboards/cisco
+

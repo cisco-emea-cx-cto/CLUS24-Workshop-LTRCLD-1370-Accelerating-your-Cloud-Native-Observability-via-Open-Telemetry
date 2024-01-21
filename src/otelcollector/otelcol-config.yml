@@ -1,7 +1,67 @@
 # Copyright The OpenTelemetry Authors
 # SPDX-License-Identifier: Apache-2.0
+receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
+  hostmetrics:
+    collection_interval: 60s
+    root_path: /hostfs
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      load: null
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      disk: null
+      filesystem:
+        exclude_fs_types:
+          fs_types:
+          - autofs
+          - binfmt_misc
+          - bpf
+          - cgroup2
+          - configfs
+          - debugfs
+          - devpts
+          - devtmpfs
+          - fusectl
+          - hugetlbfs
+          - iso9660
+          - mqueue
+          - nsfs
+          - overlay
+          - proc
+          - procfs
+          - pstore
+          - rpc_pipefs
+          - securityfs
+          - selinuxfs
+          - squashfs
+          - sysfs
+          - tracefs
+          match_type: strict
+        exclude_mount_points:
+          match_type: regexp
+          mount_points:
+          - /dev/*
+          - /proc/*
+          - /sys/*
+          - /run/docker/*
+          - /run/k3s/containerd/*
+          - /var/lib/docker/*
+          - /var/lib/kubelet/*
+          - /snap/*
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
 
-receivers:
+      network: null
+      paging:
+      processes:
+      process:
+
 #  hostmetrics:
 #    collection_interval: 60s
 #    root_path: /hostfs
@@ -119,7 +179,7 @@ receivers:
         to: body
       - type: add
         field: attributes.log.source
-        value: syslog
+        value: syslog    
   otlp:
     protocols:
       grpc:
@@ -158,16 +218,16 @@ exporters:
       insecure: true
 
   logzio/traces:
-    account_token: "VLVEzMUQWgZFCnobKvvkAoFBLGjnZhQV"
+    account_token: "xBfrWCtlMmJdiaGvyrPZMYcVcyPixemf"
     region: "us-east-1"
 
   prometheusremotewrite:
     endpoint: "https://listener.logz.io:8053"
     headers:
-      Authorization: "Bearer JIySQTwXbjxqPjBYyNHmSoytvZPGAwql"
+      Authorization: "Bearer qdlRBBOKErlvkeAqcsJyEPRXYOdCfpuw"
 
   logzio/logs:
-    account_token: "ZSqeoxVrRhzPFgPJcZpBcdFjuaOhewaz"
+    account_token: "FKgUhAUqSXyJUqQWSXBtZgcjgqBIEUDg"
     region: "us-east-1"
 
 processors:
@@ -209,7 +269,7 @@ service:
       processors: [batch]
       exporters: [otlp, debug, spanmetrics, logzio/logs, logzio/traces]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp] #hostmetrics
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics] 
       processors: [filter/ottl, transform, batch]
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
