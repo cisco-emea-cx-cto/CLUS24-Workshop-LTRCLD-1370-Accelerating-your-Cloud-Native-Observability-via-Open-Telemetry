@@ -15,7 +15,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
     attributes:
       type: agent-linux
   hostmetrics/localhost_linux_system:
-    collection_interval: 15s
+    root_path: /hostfs ## should we still use this ?     
+    collection_interval: 60s
     scrapers:
       cpu:
         metrics:
