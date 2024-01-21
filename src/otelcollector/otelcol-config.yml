@@ -204,8 +204,8 @@ exporters:
     endpoint: "https://listener.logz.io:8053"
     headers:
       Authorization: "Bearer qdlRBBOKErlvkeAqcsJyEPRXYOdCfpuw"
-# should we add? this came from the hostmetrics of logz.io    resource_to_telemetry_conversion:
-#      enabled: true    
+    resource_to_telemetry_conversion: # should we add? this came from the hostmetrics of logz.io
+      enabled: true    
   
 
   logzio/logs:
