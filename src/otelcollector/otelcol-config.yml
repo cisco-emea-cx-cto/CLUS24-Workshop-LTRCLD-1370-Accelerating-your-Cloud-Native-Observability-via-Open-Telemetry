@@ -5,7 +5,7 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
     endpoint: unix:///var/run/docker.sock
     collection_interval: 30s
     timeout: 20s
-    api_version: 1.24
+    api_version: 1.43
 #    container_labels_to_metric_labels:
 #      my.container.label: my-metric-label
 #      my.other.container.label: my-other-metric-label
