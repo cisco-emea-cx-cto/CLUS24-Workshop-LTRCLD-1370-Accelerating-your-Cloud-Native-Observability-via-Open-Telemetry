@@ -661,7 +661,8 @@ services:
       - /:/hostfs  ## for hostmetrics receiver
       - /var/log:/var/log ## for filelogs receiver
 #      - /var/run/docker.sock:/var/run/docker.sock ##for docker stats receiver 
-     
+    cap_add:
+      - CAP_DAC_READ_SEARCH 
     ports:
       - "4317:4317"          # OTLP over gRPC receiver
       - "4318:4318"          # OTLP over HTTP receiver
