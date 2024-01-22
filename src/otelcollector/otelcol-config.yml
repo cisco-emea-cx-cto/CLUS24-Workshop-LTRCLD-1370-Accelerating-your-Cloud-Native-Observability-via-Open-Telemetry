@@ -210,7 +210,7 @@ service:
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
       receivers: [otlp, syslog, filelog/localhost_linux_system]
-      processors: [batch, resourcedetection_system]
+      processors: [batch, resourcedetection/system]
       exporters: [otlp/logs, debug, logzio/logs]
 
 
