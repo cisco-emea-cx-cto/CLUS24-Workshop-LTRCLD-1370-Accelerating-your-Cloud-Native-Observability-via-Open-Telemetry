@@ -205,7 +205,7 @@ service:
       processors: [batch, resourcedetection/system]
       exporters: [otlp, debug, spanmetrics, logzio/logs, logzio/traces]
     metrics:
-      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system, docker_stats] 
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system] 
       processors: [filter/ottl, transform, batch, resourcedetection/system, resource/agent]
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
