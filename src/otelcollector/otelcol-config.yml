@@ -6,9 +6,9 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
     collection_interval: 30s
     timeout: 20s
     api_version: 1.43
-#    container_labels_to_metric_labels:
-#      my.container.label: my-metric-label
-#      my.other.container.label: my-other-metric-label
+    container_labels_to_metric_labels:
+      com.docker.compose.service: docker-compose-service
+      org.opencontainers.image.name: docker-image-name-label
 #    env_vars_to_metric_labels:
 #      MY_ENVIRONMENT_VARIABLE: my-metric-label
 #      MY_OTHER_ENVIRONMENT_VARIABLE: my-other-metric-label
@@ -21,6 +21,36 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
         enabled: true
       container.network.io.usage.tx_dropped:
         enabled: false
+      container.blockio.io_merged_recursive:
+        enabled: true
+      container.blockio.io_queued_recursive:
+        enabled: true
+      container.blockio.io_service_time_recursive:
+        enabled: true
+      container.blockio.io_serviced_recursive:
+        enabled: true
+      container.blockio.io_time_recursive:
+        enabled: true
+      container.blockio.io_wait_time_recursive:
+        enabled: true
+      container.blockio.sectors_recursive:
+        enabled: true
+      container.cpu.limit:
+        enabled: true
+      container.cpu.shares:
+        enabled: true
+      container.cpu.throttling_data.periods:
+        enabled: true
+      container.cpu.throttling_data.throttled_periods:
+        enabled: true
+      container.cpu.throttling_data.throttled_time:
+        enabled: true
+      container.cpu.usage.system:
+        enabled: true
+      container.memory.active_anon:
+        enabled: true
+      container.memory.active_file:
+        enabled: true        
 
   filelog/localhost_linux_system:
     include:
