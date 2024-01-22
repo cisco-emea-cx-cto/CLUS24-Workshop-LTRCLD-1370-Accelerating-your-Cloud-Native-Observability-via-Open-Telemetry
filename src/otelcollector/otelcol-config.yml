@@ -2,19 +2,19 @@
 # SPDX-License-Identifier: Apache-2.0
 receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
   
-  filelog/localhost_linux_system:
-    include:
-      - /var/log/*.log
-    include_file_path: true
-    operators:
-      - type: move
-        from: attributes["log.file.name"]
-        to: attributes["log_file_name"]
-      - type: move
-        from: attributes["log.file.path"]
-        to: attributes["log_file_path"]
-    attributes:
-      type: agent-linux
+#  filelog/localhost_linux_system:
+#    include:
+#      - /var/log/*.log
+#    include_file_path: true
+#    operators:
+#      - type: move
+#        from: attributes["log.file.name"]
+#        to: attributes["log_file_name"]
+#      - type: move
+#        from: attributes["log.file.path"]
+#        to: attributes["log_file_path"]
+#    attributes:
+#      type: agent-linux
   hostmetrics/localhost_linux_system:
     root_path: /hostfs ## should we still use this ?     
     collection_interval: 60s
@@ -209,7 +209,7 @@ service:
       processors: [filter/ottl, transform, batch, resourcedetection/system, resource/agent]
       exporters: [otlphttp/prometheus, debug, prometheusremotewrite]
     logs:
-      receivers: [otlp, syslog, filelog/localhost_linux_system]
+      receivers: [otlp, syslog] #, filelog/localhost_linux_system]
       processors: [batch, resourcedetection/system]
       exporters: [otlp/logs, debug, logzio/logs]
 
