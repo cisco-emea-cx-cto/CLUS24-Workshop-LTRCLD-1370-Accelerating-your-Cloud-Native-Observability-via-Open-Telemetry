@@ -50,8 +50,9 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
       container.memory.active_anon:
         enabled: true
       container.memory.active_file:
-        enabled: true        
-
+        enabled: true  
+      container.uptime:        
+        enabled: true  
   filelog/localhost_linux_system:
     include:
       - /var/log/*.log
