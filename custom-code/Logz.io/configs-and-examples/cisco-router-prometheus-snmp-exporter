@@ -1,497 +1,161 @@
 # HELP ifAdminStatus The desired state of the interface - 1.3.6.1.2.1.2.2.1.7
 # TYPE ifAdminStatus gauge
 ifAdminStatus{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1
-ifAdminStatus{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1
-ifAdminStatus{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1
-ifAdminStatus{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1
-ifAdminStatus{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1
-ifAdminStatus{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1
-ifAdminStatus{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 1
-ifAdminStatus{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 1
-ifAdminStatus{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 1
-ifAdminStatus{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1
-ifAdminStatus{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 1
-ifAdminStatus{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 1
+
 # HELP ifConnectorPresent This object has the value 'true(1)' if the interface sublayer has a physical connector and the value 'false(2)' otherwise. - 1.3.6.1.2.1.31.1.1.1.17
 # TYPE ifConnectorPresent gauge
-ifConnectorPresent{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1
-ifConnectorPresent{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1
-ifConnectorPresent{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1
-ifConnectorPresent{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1
-ifConnectorPresent{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1
-ifConnectorPresent{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 2
-ifConnectorPresent{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 2
-ifConnectorPresent{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 2
-ifConnectorPresent{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 2
-ifConnectorPresent{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 2
-ifConnectorPresent{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2
-ifConnectorPresent{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 2
-# HELP ifCounterDiscontinuityTime The value of sysUpTime on the most recent occasion at which any one or more of this interface's counters suffered a discontinuity - 1.3.6.1.2.1.31.1.1.1.19
-# TYPE ifCounterDiscontinuityTime gauge
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifCounterDiscontinuityTime{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifCounterDiscontinuityTime{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifCounterDiscontinuityTime{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
+ifConnectorPresent
+
 ifCounterDiscontinuityTime{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifHCInBroadcastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were addressed to a broadcast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.9
 # TYPE ifHCInBroadcastPkts counter
-ifHCInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCInBroadcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifHCInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifHCInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifHCInMulticastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were addressed to a multicast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.8
 # TYPE ifHCInMulticastPkts counter
-ifHCInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCInMulticastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifHCInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifHCInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifHCInOctets The total number of octets received on the interface, including framing characters - 1.3.6.1.2.1.31.1.1.1.6
 # TYPE ifHCInOctets counter
-ifHCInOctets{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.400549903e+09
-ifHCInOctets{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 2.89082567e+08
-ifHCInOctets{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 4.00374247e+08
-ifHCInOctets{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 9.13472513e+08
-ifHCInOctets{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 9.29709225e+08
-ifHCInOctets{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 7.7623e+07
-ifHCInOctets{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCInOctets{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCInOctets{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.01561372e+08
-ifHCInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.25923328e+08
 ifHCInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 7.027034e+06
+
 # HELP ifHCInUcastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were not addressed to a multicast or broadcast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.7
 # TYPE ifHCInUcastPkts counter
-ifHCInUcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.2076474e+07
-ifHCInUcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 3.224081e+06
-ifHCInUcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 4.738816e+06
-ifHCInUcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 8.422728e+06
-ifHCInUcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 8.646771e+06
-ifHCInUcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.292337e+06
-ifHCInUcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCInUcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCInUcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.465674e+06
-ifHCInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.760357e+06
 ifHCInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 90914
+
 # HELP ifHCOutBroadcastPkts The total number of packets that higher-level protocols requested be transmitted, and which were addressed to a broadcast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.13
 # TYPE ifHCOutBroadcastPkts counter
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCOutBroadcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifHCOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifHCOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifHCOutMulticastPkts The total number of packets that higher-level protocols requested be transmitted, and which were addressed to a multicast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.12
 # TYPE ifHCOutMulticastPkts counter
-ifHCOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCOutMulticastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifHCOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifHCOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifHCOutOctets The total number of octets transmitted out of the interface, including framing characters - 1.3.6.1.2.1.31.1.1.1.10
 # TYPE ifHCOutOctets counter
-ifHCOutOctets{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.212010894e+09
-ifHCOutOctets{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 7.604238e+06
-ifHCOutOctets{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 7.275604e+06
-ifHCOutOctets{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1.6575674e+07
-ifHCOutOctets{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 14358
-ifHCOutOctets{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.24106568e+08
-ifHCOutOctets{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 11860
-ifHCOutOctets{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCOutOctets{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.02256801e+08
-ifHCOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.25819639e+08
 ifHCOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 9.250188e+06
+
 # HELP ifHCOutUcastPkts The total number of packets that higher-level protocols requested be transmitted, and which were not addressed to a multicast or broadcast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.11
 # TYPE ifHCOutUcastPkts counter
-ifHCOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.0671343e+07
-ifHCOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 110397
-ifHCOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 105845
-ifHCOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 230012
-ifHCOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 174
-ifHCOutUcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.29191e+06
-ifHCOutUcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 170
-ifHCOutUcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifHCOutUcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifHCOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.468453e+06
-ifHCOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.758106e+06
 ifHCOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 113743
+
 # HELP ifHighSpeed An estimate of the interface's current bandwidth in units of 1,000,000 bits per second - 1.3.6.1.2.1.31.1.1.1.15
 # TYPE ifHighSpeed gauge
-ifHighSpeed{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1000
-ifHighSpeed{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1000
-ifHighSpeed{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1000
-ifHighSpeed{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1000
-ifHighSpeed{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1000
-ifHighSpeed{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifHighSpeed{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 8000
-ifHighSpeed{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 10000
-ifHighSpeed{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 10000
-ifHighSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
 ifHighSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
-ifHighSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifInBroadcastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were addressed to a broadcast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.3
 # TYPE ifInBroadcastPkts counter
-ifInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInBroadcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifInBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifInDiscards The number of inbound packets which were chosen to be discarded even though no errors had been detected to prevent their being deliverable to a higher-layer protocol - 1.3.6.1.2.1.2.2.1.13
 # TYPE ifInDiscards counter
-ifInDiscards{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifInDiscards{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifInDiscards{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifInDiscards{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifInDiscards{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifInDiscards{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifInDiscards{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInDiscards{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInDiscards{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifInDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifInDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifInErrors For packet-oriented interfaces, the number of inbound packets that contained errors preventing them from being deliverable to a higher-layer protocol - 1.3.6.1.2.1.2.2.1.14
 # TYPE ifInErrors counter
-ifInErrors{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifInErrors{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifInErrors{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifInErrors{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifInErrors{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifInErrors{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifInErrors{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInErrors{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInErrors{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInErrors{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifInErrors{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifInErrors{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifInMulticastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were addressed to a multicast address at this sub-layer - 1.3.6.1.2.1.31.1.1.1.2
 # TYPE ifInMulticastPkts counter
-ifInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInMulticastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifInMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifInOctets The total number of octets received on the interface, including framing characters - 1.3.6.1.2.1.2.2.1.10
 # TYPE ifInOctets counter
-ifInOctets{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.400546283e+09
-ifInOctets{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 2.89081487e+08
-ifInOctets{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 4.00372871e+08
-ifInOctets{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 9.13471433e+08
-ifInOctets{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 9.29708035e+08
-ifInOctets{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 7.7623e+07
-ifInOctets{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInOctets{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInOctets{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.01561372e+08
-ifInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.25923328e+08
 ifInOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 7.027034e+06
+
 # HELP ifInUcastPkts The number of packets, delivered by this sub-layer to a higher (sub-)layer, which were not addressed to a multicast or broadcast address at this sub-layer - 1.3.6.1.2.1.2.2.1.11
 # TYPE ifInUcastPkts counter
-ifInUcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.2076443e+07
-ifInUcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 3.224069e+06
-ifInUcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 4.7388e+06
-ifInUcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 8.422728e+06
-ifInUcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 8.646758e+06
-ifInUcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.292337e+06
-ifInUcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInUcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInUcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.465674e+06
-ifInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.760357e+06
 ifInUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 90914
+
 # HELP ifInUnknownProtos For packet-oriented interfaces, the number of packets received via the interface which were discarded because of an unknown or unsupported protocol - 1.3.6.1.2.1.2.2.1.15
 # TYPE ifInUnknownProtos counter
-ifInUnknownProtos{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 3.130639e+06
-ifInUnknownProtos{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 3.130639e+06
-ifInUnknownProtos{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 3.13066e+06
-ifInUnknownProtos{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 3.130639e+06
-ifInUnknownProtos{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 3.130639e+06
-ifInUnknownProtos{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifInUnknownProtos{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifInUnknownProtos{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifInUnknownProtos{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifInUnknownProtos{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifInUnknownProtos{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifInUnknownProtos{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifIndex A unique value, greater than zero, for each interface - 1.3.6.1.2.1.2.2.1.1
 # TYPE ifIndex gauge
-ifIndex{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1
-ifIndex{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 2
-ifIndex{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 3
-ifIndex{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 5
-ifIndex{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 4
-ifIndex{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 12
-ifIndex{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 8
-ifIndex{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 7
-ifIndex{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 6
-ifIndex{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 9
-ifIndex{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 10
 ifIndex{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 11
+
 # HELP ifLastChange The value of sysUpTime at the time the interface entered its current operational state - 1.3.6.1.2.1.2.2.1.9
 # TYPE ifLastChange gauge
-ifLastChange{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1911
-ifLastChange{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1912
-ifLastChange{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1914
-ifLastChange{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1914
-ifLastChange{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1914
-ifLastChange{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1328
-ifLastChange{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 1167
-ifLastChange{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifLastChange{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 902
-ifLastChange{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 2.2636694e+07
-ifLastChange{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.2635286e+07
 ifLastChange{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 1.21793449e+08
+
 # HELP ifLinkUpDownTrapEnable Indicates whether linkUp/linkDown traps should be generated for this interface - 1.3.6.1.2.1.31.1.1.1.14
 # TYPE ifLinkUpDownTrapEnable gauge
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 1
-ifLinkUpDownTrapEnable{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 1
-ifLinkUpDownTrapEnable{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1
-ifLinkUpDownTrapEnable{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 1
 ifLinkUpDownTrapEnable{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 1
+
 # HELP ifMtu The size of the largest packet which can be sent/received on the interface, specified in octets - 1.3.6.1.2.1.2.2.1.4
 # TYPE ifMtu gauge
-ifMtu{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1500
-ifMtu{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1500
-ifMtu{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1500
-ifMtu{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1500
-ifMtu{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1500
-ifMtu{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 17892
-ifMtu{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 1514
-ifMtu{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 1500
-ifMtu{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 1500
-ifMtu{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 9938
-ifMtu{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 9938
 ifMtu{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 9938
+
 # HELP ifNumber The number of network interfaces (regardless of their current state) present on this system. - 1.3.6.1.2.1.2.1
 # TYPE ifNumber gauge
 ifNumber 12
+
 # HELP ifOperStatus The current operational state of the interface - 1.3.6.1.2.1.2.2.1.8
 # TYPE ifOperStatus gauge
 ifOperStatus{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1
-ifOperStatus{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1
-ifOperStatus{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1
-ifOperStatus{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1
-ifOperStatus{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1
-ifOperStatus{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1
-ifOperStatus{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 1
-ifOperStatus{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 1
-ifOperStatus{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 1
-ifOperStatus{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1
-ifOperStatus{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 1
-ifOperStatus{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 1
+
 # HELP ifOutBroadcastPkts The total number of packets that higher-level protocols requested be transmitted, and which were addressed to a broadcast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.5
 # TYPE ifOutBroadcastPkts counter
-ifOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutBroadcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifOutBroadcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifOutDiscards The number of outbound packets which were chosen to be discarded even though no errors had been detected to prevent their being transmitted - 1.3.6.1.2.1.2.2.1.19
 # TYPE ifOutDiscards counter
-ifOutDiscards{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifOutDiscards{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifOutDiscards{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifOutDiscards{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifOutDiscards{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifOutDiscards{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifOutDiscards{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifOutDiscards{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutDiscards{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 4
-ifOutDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 4
 ifOutDiscards{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 138
+
 # HELP ifOutErrors For packet-oriented interfaces, the number of outbound packets that could not be transmitted because of errors - 1.3.6.1.2.1.2.2.1.20
 # TYPE ifOutErrors counter
-ifOutErrors{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifOutErrors{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifOutErrors{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifOutErrors{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifOutErrors{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifOutErrors{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifOutErrors{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifOutErrors{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutErrors{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutErrors{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifOutErrors{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifOutErrors{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifOutMulticastPkts The total number of packets that higher-level protocols requested be transmitted, and which were addressed to a multicast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.31.1.1.1.4
 # TYPE ifOutMulticastPkts counter
-ifOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutMulticastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 0
-ifOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 0
 ifOutMulticastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 0
+
 # HELP ifOutOctets The total number of octets transmitted out of the interface, including framing characters - 1.3.6.1.2.1.2.2.1.16
 # TYPE ifOutOctets counter
-ifOutOctets{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.212010894e+09
-ifOutOctets{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 7.604238e+06
-ifOutOctets{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 7.275604e+06
-ifOutOctets{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1.6575674e+07
-ifOutOctets{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 14358
-ifOutOctets{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.24106568e+08
-ifOutOctets{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 11860
-ifOutOctets{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutOctets{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.02256801e+08
-ifOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.25819639e+08
 ifOutOctets{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 9.250188e+06
+
 # HELP ifOutUcastPkts The total number of packets that higher-level protocols requested be transmitted, and which were not addressed to a multicast or broadcast address at this sub-layer, including those that were discarded or not sent - 1.3.6.1.2.1.2.2.1.17
 # TYPE ifOutUcastPkts counter
-ifOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1.0671343e+07
-ifOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 110397
-ifOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 105845
-ifOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 230012
-ifOutUcastPkts{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 174
-ifOutUcastPkts{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 1.29191e+06
-ifOutUcastPkts{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 170
-ifOutUcastPkts{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 0
-ifOutUcastPkts{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 0
-ifOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 1.468453e+06
-ifOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2.758106e+06
 ifOutUcastPkts{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 113743
+
 # HELP ifPhysAddress The interface's address at its protocol sub-layer - 1.3.6.1.2.1.2.2.1.6
 # TYPE ifPhysAddress gauge
-ifPhysAddress{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1",ifPhysAddress="00:50:56:B1:6E:6B"} 1
-ifPhysAddress{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2",ifPhysAddress="00:50:56:B1:12:4E"} 1
-ifPhysAddress{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3",ifPhysAddress="00:50:56:B1:14:DE"} 1
-ifPhysAddress{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4",ifPhysAddress="00:50:56:B1:F5:2A"} 1
-ifPhysAddress{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5",ifPhysAddress="00:50:56:B1:5F:8C"} 1
-ifPhysAddress{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0",ifPhysAddress="00:00:00:00:00:00"} 1
-ifPhysAddress{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1",ifPhysAddress="00:00:00:00:00:00"} 1
-ifPhysAddress{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0",ifPhysAddress="00:00:00:00:00:00"} 1
-ifPhysAddress{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0",ifPhysAddress="00:00:00:00:00:00"} 1
-ifPhysAddress{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0",ifPhysAddress="00:00:00:00:00:00"} 1
-ifPhysAddress{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1",ifPhysAddress="00:00:00:00:00:00"} 1
 ifPhysAddress{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100",ifPhysAddress="00:00:00:00:00:00"} 1
+
 # HELP ifPromiscuousMode This object has a value of false(2) if this interface only accepts packets/frames that are addressed to this station - 1.3.6.1.2.1.31.1.1.1.16
 # TYPE ifPromiscuousMode gauge
-ifPromiscuousMode{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 2
-ifPromiscuousMode{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 2
-ifPromiscuousMode{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 2
-ifPromiscuousMode{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 2
 ifPromiscuousMode{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 2
+
 # HELP ifSpeed An estimate of the interface's current bandwidth in bits per second - 1.3.6.1.2.1.2.2.1.5
 # TYPE ifSpeed gauge
-ifSpeed{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1"} 1e+09
-ifSpeed{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2"} 1e+09
-ifSpeed{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3"} 1e+09
-ifSpeed{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4"} 1e+09
-ifSpeed{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5"} 1e+09
-ifSpeed{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0"} 56000
-ifSpeed{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1"} 4.294967295e+09
-ifSpeed{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0"} 4.294967295e+09
-ifSpeed{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0"} 4.294967295e+09
-ifSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0"} 100000
-ifSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1"} 100000
 ifSpeed{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100"} 100000
+
 # HELP ifType_info The type of interface - 1.3.6.1.2.1.2.2.1.3 (EnumAsInfo)
 # TYPE ifType_info gauge
-ifType_info{ifAlias="",ifDescr="GigabitEthernet1",ifIndex="1",ifName="Gi1",ifType="ethernetCsmacd"} 1
-ifType_info{ifAlias="",ifDescr="GigabitEthernet2",ifIndex="2",ifName="Gi2",ifType="ethernetCsmacd"} 1
-ifType_info{ifAlias="",ifDescr="GigabitEthernet3",ifIndex="3",ifName="Gi3",ifType="ethernetCsmacd"} 1
-ifType_info{ifAlias="",ifDescr="GigabitEthernet4",ifIndex="5",ifName="Gi4",ifType="ethernetCsmacd"} 1
-ifType_info{ifAlias="",ifDescr="GigabitEthernet5",ifIndex="4",ifName="Gi5",ifType="ethernetCsmacd"} 1
-ifType_info{ifAlias="",ifDescr="LISP0",ifIndex="12",ifName="LI0",ifType="other"} 1
-ifType_info{ifAlias="",ifDescr="Loopback1",ifIndex="8",ifName="Lo1",ifType="softwareLoopback"} 1
-ifType_info{ifAlias="",ifDescr="Null0",ifIndex="7",ifName="Nu0",ifType="other"} 1
-ifType_info{ifAlias="",ifDescr="VoIP-Null0",ifIndex="6",ifName="Vo0",ifType="other"} 1
-ifType_info{ifAlias="Tunnel to C8K-LISP-Azure-R1 Int Tunnel0",ifDescr="Tunnel0",ifIndex="9",ifName="Tu0",ifType="tunnel"} 1
-ifType_info{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel1",ifIndex="10",ifName="Tu1",ifType="tunnel"} 1
 ifType_info{ifAlias="Tunnel to C8K-LISP-Azure-R2 Int Tunnel0",ifDescr="Tunnel100",ifIndex="11",ifName="Tu100",ifType="tunnel"} 1
+
 # HELP snmp_scrape_duration_seconds Total SNMP time scrape took (walk and processing).
 # TYPE snmp_scrape_duration_seconds gauge
 snmp_scrape_duration_seconds{module="if_mib"} 4.933662877
+
 # HELP snmp_scrape_packets_retried Packets retried for get, bulkget, and walk.
 # TYPE snmp_scrape_packets_retried gauge
 snmp_scrape_packets_retried{module="if_mib"} 0
+
 # HELP snmp_scrape_packets_sent Packets sent for get, bulkget, and walk; including retries.
 # TYPE snmp_scrape_packets_sent gauge
 snmp_scrape_packets_sent{module="if_mib"} 20
+
 # HELP snmp_scrape_pdus_returned PDUs returned from get, bulkget, and walk.
 # TYPE snmp_scrape_pdus_returned gauge
 snmp_scrape_pdus_returned{module="if_mib"} 446
+
 # HELP snmp_scrape_walk_duration_seconds Time SNMP walk/bulkwalk took.
 # TYPE snmp_scrape_walk_duration_seconds gauge
 snmp_scrape_walk_duration_seconds{module="if_mib"} 4.927599418
+
 # HELP sysUpTime The time (in hundredths of a second) since the network management portion of the system was last re-initialized. - 1.3.6.1.2.1.1.3
 # TYPE sysUpTime gauge
 sysUpTime 1.5653719e+08
