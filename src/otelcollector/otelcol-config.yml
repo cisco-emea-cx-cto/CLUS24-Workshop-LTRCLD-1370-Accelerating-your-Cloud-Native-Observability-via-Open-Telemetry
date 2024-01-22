@@ -59,6 +59,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
       ifDescr:
         description: "A textual description of the interface"
         oid: "1.3.6.1.2.1.2.2.1.2"
+      sysName:
+        oid: "1.3.6.1.2.1.1.5.0"
 
     attributes:
       ifIndex:
@@ -85,6 +87,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr
+            resource_attributes:
+              - sysName              
 
       # Oper Status
       ifOperStatus:
@@ -99,7 +103,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr        
-
+            resource_attributes:
+              - sysName
       ifHCOutOctets:
         description: "Total octets transmitted out of the interface"
         unit: "octets"
@@ -114,7 +119,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr            
-
+            resource_attributes:
+              - sysName
       # Errors
       ifInErrors:
         description: "Inbound Errors"
@@ -130,7 +136,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr              
-      
+            resource_attributes:
+              - sysName      
       ifOutErrors:
         description: "Outbound Errors"
         unit: "1"
@@ -145,7 +152,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr    
-
+            resource_attributes:
+              - sysName
       ifConnectorPresent:
         description: "True if the interface sublayer has a physical connector"
         unit: "boolean"
@@ -158,7 +166,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr        
-
+            resource_attributes:
+              - sysName
       ifHCInMulticastPkts:
         description: "Packets delivered to a multicast address"
         unit: "packets"
@@ -173,7 +182,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr        
-
+            resource_attributes:
+              - sysName
       ifHCInOctets:
         description: "Total octets received on the interface"
         unit: "octets"
@@ -188,7 +198,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr      
-
+            resource_attributes:
+              - sysName
       ifHCInUcastPkts:
         description: "Unicast packets delivered to a higher layer"
         unit: "packets"
@@ -203,6 +214,9 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
+            resource_attributes:
+              - sysName
+
       ifHCOutBroadcastPkts:
         description: "Broadcast packets requested to be transmitted"
         unit: "packets"
@@ -216,7 +230,9 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifIndex
               - name: ifName
               - name: ifAlias
-              - name: ifDescr     
+              - name: ifDescr   
+                resource_attributes:
+              - sysName            
       ifHCOutMulticastPkts:
         description: "Multicast packets requested to be transmitted"
         unit: "packets"
@@ -231,7 +247,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
-
+            resource_attributes:
+              - sysName
       ifHCOutUcastPkts:
         description: "Unicast packets requested to be transmitted"
         unit: "packets"
@@ -246,6 +263,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
+            resource_attributes:
+              - sysName              
       ifHighSpeed:
         description: "Current bandwidth in megabits per second"
         unit: "Mbps"
@@ -258,6 +277,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
+            resource_attributes:
+              - sysName              
       ifInBroadcastPkts:
         description: "Packets delivered to a broadcast address at this sub-layer"
         unit: "packets"
@@ -272,7 +293,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
-
+            resource_attributes:
+              - sysName
 
 
       ifHCInBroadcastPkts:
@@ -289,7 +311,8 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr
-
+            resource_attributes:
+              - sysName
   syslog:
     udp:
       listen_address: "0.0.0.0:1514"
