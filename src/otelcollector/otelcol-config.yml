@@ -53,6 +53,83 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
         enabled: true  
       container.uptime:        
         enabled: true  
+      container.memory.anon:
+        enabled: true
+      container.memory.cache:
+        enabled: true
+      container.memory.dirty:
+        enabled: true
+      container.memory.hierarchical_memory_limit:
+        enabled: true
+      container.memory.hierarchical_memsw_limit:
+        enabled: true
+      container.memory.inactive_anon:
+        enabled: true
+      container.memory.inactive_file:
+        enabled: true
+      container.memory.mapped_file:
+        enabled: true
+      container.memory.pgfault:
+        enabled: true
+      container.memory.pgmajfault:
+        enabled: true
+      container.memory.pgpgin:
+        enabled: true
+      container.memory.pgpgout:
+        enabled: true
+      container.memory.rss:
+        enabled: true
+      container.memory.rss_huge:
+        enabled: true
+      container.memory.total_active_anon:
+        enabled: true
+      container.memory.total_active_file:
+        enabled: true
+      container.memory.total_dirty:
+        enabled: true
+      container.memory.total_inactive_anon:
+        enabled: true
+      container.memory.total_inactive_file:
+        enabled: true
+      container.memory.total_mapped_file:
+        enabled: true
+      container.memory.total_pgfault:
+        enabled: true
+      container.memory.total_pgmajfault:
+        enabled: true
+      container.memory.total_pgpgin:
+        enabled: true
+      container.memory.total_pgpgout:
+        enabled: true
+      container.memory.total_rss:
+        enabled: true
+      container.memory.total_rss_huge:
+        enabled: true
+      container.memory.total_unevictable:
+        enabled: true
+      container.memory.total_writeback:
+        enabled: true
+      container.memory.unevictable:
+        enabled: true
+      container.memory.usage.max:
+        enabled: true
+      container.memory.writeback:
+        enabled: true
+      container.network.io.usage.rx_errors:
+        enabled: true
+      container.network.io.usage.rx_packets:
+        enabled: true
+      container.network.io.usage.tx_errors:
+        enabled: true
+      container.network.io.usage.tx_packets:
+        enabled: true
+      container.pids.count:
+        enabled: true
+      container.pids.limit:
+        enabled: true
+      container.restarts:
+        enabled: true
+
   filelog/localhost_linux_system:
     include:
       - /var/log/*.log
