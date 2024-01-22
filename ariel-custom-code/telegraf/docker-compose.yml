@@ -10,9 +10,12 @@ services:							    # Individual docker services for TIG
   telegraf:							    # telegraf service configuration	
     image: telegraf								
     container_name: telegraf
-    restart: always                     # Restarts automatically if it crashes
+    restart: always   
+#    user: telegraf:<host_docker_gid> ## not used in my setup, we bypass with chmod
+                  # Restarts automatically if it crashes
     volumes:
     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro  # Mounts telegraf.conf into the container
+    - /var/run/docker.sock:/var/run/docker.sock
 #    depends_on:						    # Waits until influxdb service is running
 #      - influxdb
 #    links:								# Connects this service to influxdb service
