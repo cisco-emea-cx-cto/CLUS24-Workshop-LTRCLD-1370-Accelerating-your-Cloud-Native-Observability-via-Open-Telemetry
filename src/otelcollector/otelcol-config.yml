@@ -46,6 +46,7 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
     endpoint: udp://172.24.79.29:161
     version: v2c
     community: public
+    
     resource_attributes:
       ifIndex:
         description: "A unique value for each interface"
