@@ -162,6 +162,37 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifAlias
               - name: ifDescr    
 
+      ifInDiscards:
+        description: "Inbound Discards"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.13"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr    
+
+      ifOutDiscards:
+        description: "Outbound Discards"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.19"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr    
+
+
       ifConnectorPresent:
         description: "True if the interface sublayer has a physical connector"
         unit: "boolean"
