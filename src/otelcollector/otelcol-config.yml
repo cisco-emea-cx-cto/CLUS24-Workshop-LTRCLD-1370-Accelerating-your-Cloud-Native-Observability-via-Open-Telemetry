@@ -259,6 +259,18 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifName
               - name: ifAlias
               - name: ifDescr     
+
+      ifMtu:
+        unit: "MTU"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.4"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr                   
 #      ifInBroadcastPkts:
 #        description: "Packets delivered to a broadcast address at this sub-layer"
 #        unit: "packets"
