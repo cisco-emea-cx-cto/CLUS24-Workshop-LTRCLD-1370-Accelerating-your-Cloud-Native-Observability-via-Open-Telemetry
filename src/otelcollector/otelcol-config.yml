@@ -147,18 +147,18 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifAlias
               - name: ifDescr    
 
-#      ifConnectorPresent:
-#        description: "True if the interface sublayer has a physical connector"
-#        unit: "boolean"
-#        gauge:
-#          value_type: int
-#        column_oids:
-#          - oid: "1.3.6.1.2.1.31.1.1.1.17"
-#            attributes:
-#              - name: ifIndex
-#              - name: ifName
-#              - name: ifAlias
-#              - name: ifDescr        
+      ifConnectorPresent:
+        description: "True if the interface sublayer has a physical connector"
+        unit: "boolean"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.17"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr        
 
 #      ifHCInMulticastPkts:
 #        description: "Packets delivered to a multicast address"
@@ -247,18 +247,18 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
 #              - name: ifName
 #              - name: ifAlias
 #              - name: ifDescr     
-#      ifHighSpeed:
-#        description: "Current bandwidth in megabits per second"
-#        unit: "Mbps"
-#        gauge:
-#          value_type: int
-#        column_oids:
-#          - oid: "1.3.6.1.2.1.31.1.1.1.15"
-#            attributes:
-#              - name: ifIndex
-#              - name: ifName
-#              - name: ifAlias
-#              - name: ifDescr     
+      ifHighSpeed:
+        description: "Current bandwidth in megabits per second"
+        unit: "Mbps"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.15"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
 #      ifInBroadcastPkts:
 #        description: "Packets delivered to a broadcast address at this sub-layer"
 #        unit: "packets"
