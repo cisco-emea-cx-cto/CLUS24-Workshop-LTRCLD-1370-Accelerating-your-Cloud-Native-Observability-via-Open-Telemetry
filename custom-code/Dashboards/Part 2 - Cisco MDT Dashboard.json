@@ -18,16 +18,16 @@
         "version": ""
       },
       {
-        "type": "panel",
-        "id": "gauge",
-        "name": "Gauge",
-        "version": ""
-      },
-      {
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
         "version": "8.5.1"
+      },
+      {
+        "type": "panel",
+        "id": "graph",
+        "name": "Graph (old)",
+        "version": ""
       },
       {
         "type": "datasource",
@@ -39,6 +39,12 @@
         "type": "panel",
         "id": "stat",
         "name": "Stat",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
         "version": ""
       },
       {
@@ -70,18 +76,21 @@
         }
       ]
     },
+    "description": "Cisco IOS XE and the Catalyst 9300 switch using the gRPC Dial-Out Model-Driven Telemetry interface to provide basic health and interface monitoring capabilities",
     "editable": true,
     "fiscalYearStartMonth": 0,
+    "gnetId": 13462,
     "graphTooltip": 0,
     "id": null,
-    "iteration": 1707254382171,
+    "iteration": 1707256909387,
     "links": [],
     "liveNow": false,
     "panels": [
       {
         "collapsed": false,
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${datasource}"
         },
         "gridPos": {
           "h": 1,
@@ -89,20 +98,22 @@
           "x": 0,
           "y": 0
         },
-        "id": 2,
+        "id": 27,
         "panels": [],
-        "title": "General - Host",
+        "title": "Health",
         "type": "row"
       },
       {
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "thresholds"
             },
+            "decimals": 1,
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -110,6 +121,10 @@
                 {
                   "color": "green",
                   "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
                 }
               ]
             }
@@ -117,16 +132,16 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 5,
-          "w": 4,
+          "h": 3,
+          "w": 2,
           "x": 0,
           "y": 1
         },
-        "id": 6,
+        "id": 22,
         "options": {
           "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
+          "graphMode": "area",
+          "justifyMode": "auto",
           "orientation": "auto",
           "reduceOptions": {
             "calcs": [
@@ -141,15 +156,19 @@
         "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_n_containers{engine_host=~\"$engine_host\"}",
-            "interval": "",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "expr": "(Cisco_IOS_XE_native_native_version{source=~\"$SOURCE\"})",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
             "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "refId": "A"
           }
         ],
-        "title": "Containers",
+        "title": "Version",
         "type": "stat"
       },
       {
@@ -161,6 +180,7 @@
             "color": {
               "mode": "thresholds"
             },
+            "decimals": 1,
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -168,6 +188,10 @@
                 {
                   "color": "green",
                   "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
                 }
               ]
             }
@@ -175,17 +199,97 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 5,
-          "w": 4,
+          "h": 3,
+          "w": 2,
+          "x": 2,
+          "y": 1
+        },
+        "id": 103,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "expr": "(Cisco_IOS_XE_native_native_source)",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "PID",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "dateTimeAsIso"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 3,
           "x": 4,
           "y": 1
         },
-        "id": 10,
+        "id": 13,
+        "links": [],
+        "maxDataPoints": 100,
         "options": {
-          "colorMode": "value",
+          "colorMode": "none",
           "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -193,444 +297,43 @@
             "fields": "",
             "values": false
           },
-          "text": {},
+          "text": {
+            "titleSize": 10
+          },
           "textMode": "auto"
         },
         "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_n_images{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "builder",
+            "expr": "openconfig_system_system_state_boot_time * 1000",
+            "format": "table",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{source}}",
+            "refId": "A"
           }
         ],
-        "title": "Images",
+        "title": "Last Boot",
         "type": "stat"
       },
       {
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "thresholds"
             },
+            "displayName": "",
             "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 8,
-          "y": 1
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_n_containers_running{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Containers Running ",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 12,
-          "y": 1
-        },
-        "id": 7,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_n_containers_paused{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Containers Paused",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 16,
-          "y": 1
-        },
-        "id": 9,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_n_containers_stopped{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Containers Stopped ",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "description": "go routines are threads in go programming language",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 20,
-          "y": 1
-        },
-        "id": 11,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_n_goroutines{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Live Threads ",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 5,
-          "x": 0,
-          "y": 6
-        },
-        "id": 39,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "sum(docker_container_net_rx_errors{engine_host=~\"$engine_host\"})\n+\nsum(docker_container_net_tx_errors{engine_host=~\"$engine_host\"})",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Total Network Errors",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 5,
-          "x": 5,
-          "y": 6
-        },
-        "id": 14,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_memory_total{engine_host=\"$engine_host\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Total Memory Allocated",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 5,
-          "x": 10,
-          "y": 6
-        },
-        "id": 15,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "sum(docker_container_mem_usage{engine_host=\"$engine_host\"})",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Total Memory Used",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "max": 1,
+            "max": 15000,
             "min": 0,
             "thresholds": {
               "mode": "absolute",
@@ -640,260 +343,195 @@
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
-                  "value": 0.65
+                  "color": "red",
+                  "value": 14500
+                }
+              ]
+            },
+            "unit": "rpm"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 7,
+          "y": 1
+        },
+        "id": 2,
+        "links": [],
+        "options": {
+          "displayMode": "lcd",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "text": {}
+        },
+        "pluginVersion": "8.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "expr": "(avg_over_time(openconfig_platform_components_component_fan_state_source[10s])) ",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{ name }}",
+            "refId": "A"
+          }
+        ],
+        "title": "Fan Speed",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "always",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
-                  "value": 0.8
+                  "value": 80
                 }
               ]
             },
-            "unit": "percentunit"
+            "unit": "deckbytes"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 5,
-          "w": 9,
-          "x": 15,
-          "y": 6
+          "h": 7,
+          "w": 13,
+          "x": 11,
+          "y": 1
         },
-        "id": 16,
+        "id": 17,
+        "interval": "10s",
         "options": {
-          "orientation": "auto",
-          "reduceOptions": {
+          "legend": {
             "calcs": [
+              "mean",
               "lastNotNull"
             ],
-            "fields": "",
-            "values": false
+            "displayMode": "table",
+            "placement": "bottom"
           },
-          "showThresholdLabels": false,
-          "showThresholdMarkers": true,
-          "text": {}
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
         },
         "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "sum(docker_container_mem_usage{engine_host=\"$engine_host\"})\n/\nsum(docker_memory_total{engine_host=\"$engine_host\"})",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "avg_over_time(Cisco_IOS_XE_memory_oper_memory_statistics_memory_statistic_free_memory{name=\"Processor\",source=~\"$SOURCE\"}[$__interval])",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{ name }} $__interval",
+            "range": true,
+            "refId": "A"
           }
         ],
-        "title": "Memory Utilization",
-        "type": "gauge"
+        "title": "Memory Used",
+        "type": "timeseries"
       },
       {
         "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 0,
-          "y": 11
-        },
-        "id": 40,
-        "options": {
-          "displayMode": "gradient",
-          "minVizHeight": 10,
-          "minVizWidth": 0,
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showUnfilled": true,
-          "text": {}
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "sort_desc(topk(5,docker_container_cpu_usage_percent{engine_host=\"$engine_host\"}) by (container_image))",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "{{container_image}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Top Images CPU Utilization",
-        "type": "bargauge"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 8,
-          "y": 11
-        },
-        "id": 41,
-        "options": {
-          "displayMode": "gradient",
-          "minVizHeight": 10,
-          "minVizWidth": 0,
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showUnfilled": true,
-          "text": {}
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "sort_desc(topk(5,docker_container_mem_usage{engine_host=\"$engine_host\"}) by (container_image))",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "{{container_image}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Top Images Memory Usage",
-        "type": "bargauge"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 16,
-          "y": 11
-        },
-        "id": 42,
-        "options": {
-          "displayMode": "gradient",
-          "minVizHeight": 10,
-          "minVizWidth": 0,
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "showUnfilled": true,
-          "text": {}
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "sort_desc(topk(5,\ndocker_container_net_rx_bytes{engine_host=\"$engine_host\"}\n+\ndocker_container_net_tx_bytes{engine_host=\"$engine_host\"}\n) by (container_image))",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "{{container_image}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Top Images Total Network Traffic",
-        "type": "bargauge"
-      },
-      {
-        "collapsed": false,
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 19
-        },
-        "id": 44,
-        "panels": [],
-        "title": "Status - Container",
-        "type": "row"
-      },
-      {
-        "datasource": {
+          "type": "prometheus",
           "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
+              "mode": "palette-classic"
             },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 6,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "always",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
@@ -901,126 +539,10 @@
                 {
                   "color": "green",
                   "value": null
-                }
-              ]
-            },
-            "unit": "ns"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 12,
-          "x": 0,
-          "y": 20
-        },
-        "id": 47,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "/^container_name$/",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_status_uptime_ns{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "format": "table",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Container",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
+                },
                 {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "ns"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 12,
-          "y": 20
-        },
-        "id": 46,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_status_uptime_ns{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Uptime",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
+                  "color": "red",
+                  "value": 80
                 }
               ]
             },
@@ -1029,135 +551,71 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 5,
-          "w": 6,
-          "x": 18,
-          "y": 20
-        },
-        "id": 48,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.1",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_status_oomkilled{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Number Of OOOMKills ",
-        "type": "stat"
-      },
-      {
-        "collapsed": false,
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "gridPos": {
-          "h": 1,
-          "w": 24,
+          "h": 11,
+          "w": 11,
           "x": 0,
-          "y": 25
+          "y": 4
         },
-        "id": 24,
-        "panels": [],
-        "title": "CPU - Container",
-        "type": "row"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 26
-        },
-        "id": 26,
+        "id": 15,
+        "interval": "30s",
         "options": {
           "legend": {
             "calcs": [
               "lastNotNull",
               "max"
             ],
-            "displayMode": "table",
-            "placement": "right"
+            "displayMode": "list",
+            "placement": "bottom"
           },
           "tooltip": {
-            "mode": "multi"
+            "mode": "multi",
+            "sort": "none"
           }
         },
+        "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_container_cpu_usage_percent{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "Cisco_IOS_XE_process_cpu_oper_cpu_usage_cpu_utilization_five_seconds{source=~\"$SOURCE\"}",
+            "format": "time_series",
+            "hide": false,
+            "instant": false,
             "interval": "",
-            "legendFormat": "{{container_name}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "intervalFactor": 1,
+            "legendFormat": "Five Seconds",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "code",
+            "expr": "Cisco_IOS_XE_process_cpu_oper_cpu_usage_cpu_utilization_one_minute{source=~\"$SOURCE\"}",
+            "hide": false,
+            "legendFormat": "One Minutes",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "Cisco_IOS_XE_process_cpu_oper_cpu_usage_cpu_utilization_five_minutes{source=~\"$SOURCE\"}",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Five Minutes",
+            "range": true,
+            "refId": "C"
           }
         ],
         "title": "CPU Utilization",
@@ -1165,107 +623,8 @@
       },
       {
         "datasource": {
-          "uid": "$datasource"
-        },
-        "description": "Time in which cpu tries to go over the set limit ",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "ms"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 26
-        },
-        "id": 25,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_cpu_throttling_throttled_time{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Time Throttled ",
-        "type": "timeseries"
-      },
-      {
-        "collapsed": false,
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 34
-        },
-        "id": 4,
-        "panels": [],
-        "title": "Memory - Container",
-        "type": "row"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
         "fieldConfig": {
           "defaults": {
@@ -1277,21 +636,21 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
+              "fillOpacity": 10,
+              "gradientMode": "none",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
                 "viz": false
               },
               "lineInterpolation": "linear",
-              "lineWidth": 2,
+              "lineWidth": 1,
               "pointSize": 5,
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "auto",
-              "spanNulls": false,
+              "showPoints": "always",
+              "spanNulls": true,
               "stacking": {
                 "group": "A",
                 "mode": "none"
@@ -1300,42 +659,49 @@
                 "mode": "off"
               }
             },
+            "links": [],
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
                 }
               ]
             },
-            "unit": "decbytes"
+            "unit": "deckbytes"
           },
           "overrides": [
             {
               "matcher": {
                 "id": "byName",
-                "options": "Limit"
+                "options": "Processor free"
               },
               "properties": [
                 {
-                  "id": "custom.lineStyle",
+                  "id": "color",
                   "value": {
-                    "dash": [
-                      10,
-                      15
-                    ],
-                    "fill": "dash"
+                    "fixedColor": "yellow",
+                    "mode": "fixed"
                   }
-                },
-                {
-                  "id": "custom.fillOpacity",
-                  "value": 0
-                },
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Processor used"
+              },
+              "properties": [
                 {
                   "id": "color",
                   "value": {
-                    "fixedColor": "semi-dark-red",
+                    "fixedColor": "yellow",
                     "mode": "fixed"
                   }
                 }
@@ -1344,671 +710,275 @@
           ]
         },
         "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 35
+          "h": 6,
+          "w": 13,
+          "x": 11,
+          "y": 8
         },
-        "id": 13,
+        "id": 18,
+        "interval": "10s",
         "options": {
           "legend": {
             "calcs": [
-              "lastNotNull",
-              "max"
+              "mean",
+              "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "right"
+            "placement": "bottom"
           },
           "tooltip": {
-            "mode": "multi"
+            "mode": "multi",
+            "sort": "desc"
           }
         },
+        "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_container_mem_usage{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}}",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_limit{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "Limit",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "editorMode": "code",
+            "expr": "avg_over_time(Cisco_IOS_XE_memory_oper_memory_statistics_memory_statistic_used_memory{name=\"Processor\",source=\"$SOURCE\"}[$__interval])",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{ name }} $__interval",
+            "refId": "A"
           }
         ],
-        "title": "Memory Usage ",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 35
-        },
-        "id": 45,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_active_file{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} - Active",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_inactive_file{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - Inactive",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Cache Memory Usage",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "decbytes"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 43
-        },
-        "id": 17,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_active_anon{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} - Active",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_inactive_anon{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - Inactive",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Anonymous Memory Usage",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 43
-        },
-        "id": 19,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_pgmajfault{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} -  pgmajfault",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "docker_container_mem_pgfault{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - pgfault",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Memory Errors ",
+        "title": "Memory Free",
         "type": "timeseries"
       },
       {
         "collapsed": false,
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${datasource}"
         },
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 51
+          "y": 15
         },
-        "id": 31,
+        "id": 90,
         "panels": [],
-        "title": "Network - Container",
+        "title": "Cisco-IOS-XE-process-cpu-oper:cpu-usage/cpu-utilization",
         "type": "row"
       },
       {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
-        "description": "",
+        "decimals": 0,
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "decbytes"
+            "links": []
           },
           "overrides": []
         },
+        "fill": 1,
+        "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 12,
+          "h": 10,
+          "w": 8,
           "x": 0,
-          "y": 52
+          "y": 16
         },
-        "id": 33,
+        "hiddenSeries": false,
+        "id": 87,
+        "interval": "30s",
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": true,
+          "max": true,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "sideWidth": 250,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
         "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
+          "alertThreshold": true
         },
+        "percentage": false,
+        "pluginVersion": "8.5.1",
+        "pointradius": 2,
+        "points": true,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_container_net_rx_bytes{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} -  Received",
+            "expr": "(Cisco_IOS_XE_process_cpu_oper:cpu_usage/cpu_utilization_five_minutes{source=~\"$SOURCE\"})",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "$col",
             "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "-docker_container_net_tx_bytes{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - Sent",
-            "refId": "B",
             "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
           }
         ],
-        "title": "Sent & Received Bytes",
-        "type": "timeseries"
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "CPU",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
       },
       {
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
-        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
+              "mode": "thresholds"
             },
             "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "align": "auto",
+              "displayMode": "auto",
+              "filterable": false,
+              "inspect": false
             },
+            "links": [],
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 52
-        },
-        "id": 34,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
-          }
-        },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "docker_container_net_rx_errors{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} -  Received",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "-docker_container_net_rx_errors{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - Sent",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          }
-        ],
-        "title": "Sent & Received Errors",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "uid": "$datasource"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
+                  "color": "green",
+                  "value": null
+                },
                 {
-                  "color": "green"
+                  "color": "red",
+                  "value": 80
                 }
               ]
-            },
-            "unit": "none"
+            }
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 60
+          "h": 10,
+          "w": 16,
+          "x": 8,
+          "y": 16
         },
-        "id": 35,
+        "id": 88,
+        "interval": "5s",
         "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max"
+          "footer": {
+            "fields": "",
+            "reducer": [
+              "sum"
             ],
-            "displayMode": "table",
-            "placement": "right"
+            "show": false
           },
-          "tooltip": {
-            "mode": "multi"
-          }
+          "showHeader": true
         },
+        "pluginVersion": "8.5.1",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_container_net_tx_dropped{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} -  Sent",
-            "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "docker_container_net_rx_dropped{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} -  Received",
-            "refId": "B",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "expr": "Cisco_IOS_XE_process_cpu_oper_cpu_usage_cpu_utilization_cpu_usage_processes_cpu_usage_process_pid{}",
+            "format": "table",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "$col",
+            "refId": "A"
           }
         ],
-        "title": "Sent & Received Bytes Dropped",
-        "type": "timeseries"
+        "title": "CPU",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "host": true,
+                "path": true,
+                "source": true,
+                "subscription": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
       },
       {
         "collapsed": false,
         "datasource": {
-          "uid": "$datasource"
+          "type": "prometheus",
+          "uid": "${datasource}"
         },
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 68
+          "y": 26
         },
-        "id": 29,
+        "id": 74,
         "panels": [],
-        "title": "I/O - Container",
+        "title": "Cisco-IOS-XE-process-memory-oper:memory-usage-processes/memory-usage-process",
         "type": "row"
       },
       {
         "datasource": {
-          "uid": "$datasource"
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
         },
-        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
+              "mode": "thresholds"
             },
             "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 60,
-              "gradientMode": "opacity",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 2,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "align": "auto",
+              "displayMode": "auto",
+              "filterable": false,
+              "inspect": false
             },
             "mappings": [],
             "thresholds": {
@@ -2016,66 +986,2778 @@
               "steps": [
                 {
                   "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
                 }
               ]
-            },
-            "unit": "decbytes"
+            }
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
+          "h": 7,
           "w": 24,
           "x": 0,
-          "y": 69
+          "y": 27
+        },
+        "id": 72,
+        "options": {
+          "footer": {
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "8.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "expr": "Cisco_IOS_XE_process_memory_oper_memory_usage_processes_memory_usage_process_allocated_memory{}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "{{*}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Process Memory",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "host": true,
+                "subscription": true,
+                "tty": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 34
+        },
+        "id": 98,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 16
+            },
+            "id": 96,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(Cisco_IOS_XE_native:native_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{name}}",
+                "refId": "A"
+              }
+            ],
+            "title": "Cisco-IOS-XE-native:native",
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-native:native",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 35
+        },
+        "id": 93,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 6,
+              "x": 0,
+              "y": 17
+            },
+            "hiddenSeries": false,
+            "id": 91,
+            "interval": "10s",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "connected",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(avg_over_time(Cisco_IOS_XE_memory_oper:memory_statistics/memory_statistic_free_memory{name=\"Processor\",source=~\"$SOURCE\"}[$__interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} $col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Memory",
+            "tooltip": {
+              "shared": true,
+              "sort": 2,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "deckbytes",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "links": [],
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 18,
+              "x": 6,
+              "y": 17
+            },
+            "id": 94,
+            "interval": "10s",
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": true,
+                  "displayName": "Time"
+                }
+              ]
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(Cisco_IOS_XE_memory_oper:memory_statistics/memory_statistic_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} $col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "Memory",
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-memory-oper:memory-statistics/memory-statistic",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 36
+        },
+        "id": 84,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "filterable": true
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 14,
+              "w": 24,
+              "x": 0,
+              "y": 7
+            },
+            "id": 34,
+            "options": {
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": false,
+                  "displayName": "vlan_id_number"
+                }
+              ]
+            },
+            "pluginVersion": "7.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(Cisco_IOS_XE_matm_oper:matm_oper_data/matm_table_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "MAC Address Tab Mapping",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-matm-oper:matm-oper-data/matm-table",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 37
+        },
+        "id": 82,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "filterable": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 8
+            },
+            "id": 80,
+            "options": {
+              "showHeader": true
+            },
+            "pluginVersion": "7.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(Cisco_IOS_XE_environment_oper:environment_sensors/environment_sensor_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{*}}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "/environment-ios-xe-oper:environment-sensors",
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-environment-oper:environment-sensors/environment-sensor",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 38
+        },
+        "id": 78,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 21
+            },
+            "id": 76,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(Cisco_IOS_XE_platform_oper:components/component_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{*}}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "/platform-ios-xe-oper:components",
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-platform-oper:components/component",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 39
+        },
+        "id": 51,
+        "panels": [
+          {
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 17,
+              "w": 24,
+              "x": 0,
+              "y": 23
+            },
+            "id": 49,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": true,
+                  "displayName": "Time"
+                }
+              ]
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "avg by (*)(Cisco_IOS_XE_mdt_oper_mdt_oper_data_mdt_subscriptions_base_period)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A"
+              }
+            ],
+            "title": "MDT",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "last_state_change_time": true,
+                    "mdt_receivers/last_state_change_time": true,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-mdt-oper:mdt-oper-data/mdt-subscriptions",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 40
         },
         "id": 32,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull",
-              "max",
-              "min"
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 13,
+              "w": 24,
+              "x": 0,
+              "y": 24
+            },
+            "id": 36,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "(Cisco_IOS_XE_arp_oper:arp_data/arp_vrf_source{vrf=~\"$VRF\"})",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
             ],
-            "displayMode": "table",
-            "placement": "right"
-          },
-          "tooltip": {
-            "mode": "multi"
+            "title": "ARP",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
           }
+        ],
+        "title": "Cisco-IOS-XE-arp-oper:arp-data/arp-vrf",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
         },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 41
+        },
+        "id": 47,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 11,
+              "w": 24,
+              "x": 0,
+              "y": 25
+            },
+            "id": 40,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": false,
+                  "displayName": "statistics/in_octets"
+                }
+              ]
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(Cisco_IOS_XE_interfaces_oper:interfaces/interface_last_change{name=~\"$NAME\",source=~\"$SOURCE\"})",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "Interface Stats",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "name": true,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 36
+            },
+            "hiddenSeries": false,
+            "id": 45,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": false,
+              "max": true,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sort": "max",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(rate(Cisco_IOS_XE_interfaces_oper:interfaces/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Interface tx-kbps",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Kbits",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 36
+            },
+            "hiddenSeries": false,
+            "id": 44,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(rate(Cisco_IOS_XE_interfaces_oper:interfaces/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Interface rx-kbps",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Kbits",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 44
+            },
+            "hiddenSeries": false,
+            "id": 42,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "avg(rate(Cisco_IOS_XE_interfaces_oper:interfaces/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Device Traffic",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Kbits",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 44
+            },
+            "hiddenSeries": false,
+            "id": 43,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sort": "total",
+              "sortDesc": true,
+              "total": true,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(rate(Cisco_IOS_XE_interfaces_oper:interfaces/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              },
+              {
+                "expr": "(rate(Cisco_IOS_XE_interfaces_oper:interfaces/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "B",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Packet Counters",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          }
+        ],
+        "title": "Cisco-IOS-XE-interfaces-oper:interfaces/interface + Charts",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 42
+        },
+        "id": 70,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 26
+            },
+            "id": 68,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "(openconfig_system:system_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{name}}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "Openconfig System - System",
+            "type": "table"
+          }
+        ],
+        "title": "openconfig-system:system",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 43
+        },
+        "id": 66,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 27
+            },
+            "id": 64,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "(openconfig_platform:components/component_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "OC Platform Components",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "state/id 1": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "openconfig-platform:components/component",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 44
+        },
+        "id": 25,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 81
+            },
+            "id": 62,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(openconfig_interfaces:interfaces/interface/state/counters_last_clear{name=~\"$NAME\",source=~\"$SOURCE\"})",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "OpenConfig Interfaces",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "last": true,
+                    "name": false,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 17,
+              "w": 12,
+              "x": 0,
+              "y": 89
+            },
+            "hiddenSeries": false,
+            "id": 16,
+            "interval": "10s",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "hideZero": true,
+              "max": true,
+              "min": true,
+              "rightSide": true,
+              "show": true,
+              "sort": "total",
+              "sortDesc": true,
+              "total": true,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(rate(openconfig_interfaces_interfaces_interface_state_counters_in_octets{name=~\"$NAME\",source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Bytes In (OC)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "logBase": 1,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 17,
+              "w": 12,
+              "x": 12,
+              "y": 89
+            },
+            "hiddenSeries": false,
+            "id": 28,
+            "interval": "10s",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "hideZero": true,
+              "max": true,
+              "min": true,
+              "rightSide": true,
+              "show": true,
+              "sort": "total",
+              "sortDesc": true,
+              "total": true,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(rate(openconfig_interfaces_interfaces_interface_state_counters_out_octets{name=~\"$NAME\",source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Bytes Out (OC)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "logBase": 1,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 18,
+              "w": 8,
+              "x": 0,
+              "y": 106
+            },
+            "hiddenSeries": false,
+            "id": 7,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(rate(openconfig_interfaces_interfaces_interface_state_counters_in_octets{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "$col",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Total Device Bytes In/Out (OC)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 18,
+              "w": 16,
+              "x": 8,
+              "y": 106
+            },
+            "hiddenSeries": false,
+            "id": 23,
+            "interval": "10s",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "hideZero": true,
+              "max": true,
+              "min": true,
+              "rightSide": true,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": true,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(rate(openconfig_interfaces_interfaces_interface_state_counters_in_unicast_pkts{name=~\"$NAME\",source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} in",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "(rate(openconfig_interfaces_interfaces_interface_state_counters_out_unicast_pkts{name=~\"$NAME\",source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} out",
+                "refId": "B"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Packets (OC)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "pps",
+                "logBase": 1,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          }
+        ],
+        "title": "openconfig-interfaces:interfaces/interface/state/counters + Charts",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 45
+        },
+        "id": 57,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 125
+            },
+            "id": 60,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "avg by (*)(ietf_interfaces:interfaces_state/interface_phys_address{name=~\"$NAME\",source=~\"$SOURCE\"})",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{name}}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "IETF Interfaces",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true,
+                    "host": true,
+                    "last": false,
+                    "name": true,
+                    "path": true,
+                    "source": true,
+                    "subscription": true
+                  },
+                  "indexByName": {
+                    "Time": 2,
+                    "admin_status": 8,
+                    "host": 3,
+                    "if_index": 9,
+                    "last": 1,
+                    "last_change": 10,
+                    "name": 4,
+                    "oper_status": 11,
+                    "path": 5,
+                    "phys_address": 12,
+                    "source": 6,
+                    "speed": 13,
+                    "statistics/discontinuity_time": 14,
+                    "statistics/in_broadcast_pkts": 15,
+                    "statistics/in_discards": 16,
+                    "statistics/in_errors": 17,
+                    "statistics/in_multicast_pkts": 18,
+                    "statistics/in_octets": 19,
+                    "statistics/in_unicast_pkts": 20,
+                    "statistics/in_unknown_protos": 21,
+                    "statistics/out_broadcast_pkts": 22,
+                    "statistics/out_discards": 23,
+                    "statistics/out_errors": 24,
+                    "statistics/out_multicast_pkts": 25,
+                    "statistics/out_octets": 26,
+                    "statistics/out_unicast_pkts": 27,
+                    "subscription": 7,
+                    "type": 0
+                  },
+                  "renameByName": {
+                    "last": "mac"
+                  }
+                }
+              }
+            ],
+            "type": "table"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 133
+            },
+            "hiddenSeries": false,
+            "id": 58,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(rate(ietf_interfaces:interfaces_state/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "IETF out_octets",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 133
+            },
+            "hiddenSeries": false,
+            "id": 54,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(rate(ietf_interfaces:interfaces_state/interface_name{source=~\"$SOURCE\"}[$__rate_interval])) ",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }}",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "IETF in_octets",
+            "tooltip": {
+              "shared": true,
+              "sort": 1,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          }
+        ],
+        "title": "ietf-interfaces:interfaces-state/interface + Charts",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 46
+        },
+        "id": 106,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": true,
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 24,
+              "x": 0,
+              "y": 24
+            },
+            "id": 104,
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "(Cisco_IOS_XE_cdp_oper:cdp_neighbor_details/cdp_neighbor_detail_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "CDP ",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Time": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-cdp-oper:cdp-neighbor-details/cdp-neighbor-detail",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 47
+        },
+        "id": 102,
+        "panels": [
+          {
+            "aliasColors": {
+              "Processor free": "yellow",
+              "Processor used": "yellow"
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": {
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 10,
+              "w": 6,
+              "x": 0,
+              "y": 25
+            },
+            "hiddenSeries": false,
+            "id": 99,
+            "interval": "10s",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.5.1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+                },
+                "expr": "avg by (name)(Cisco_IOS_XE_poe_oper:poe_oper_data/poe_switch_consumed_poe_power{source=~\"$SOURCE\"})",
+                "format": "time_series",
+                "instant": false,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} $col",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Power",
+            "tooltip": {
+              "shared": true,
+              "sort": 2,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "mode": "time",
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "watt",
+                "logBase": 1,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false
+            }
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+            },
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false,
+                  "inspect": false
+                },
+                "links": [],
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 18,
+              "x": 6,
+              "y": 25
+            },
+            "id": 100,
+            "interval": "10s",
+            "options": {
+              "footer": {
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true
+            },
+            "pluginVersion": "8.5.1",
+            "targets": [
+              {
+                "expr": "(Cisco_IOS_XE_poe_oper:poe_oper_data/poe_switch_source)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "{{ name }} $col",
+                "refId": "A",
+                "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+              }
+            ],
+            "title": "Power",
+            "type": "table"
+          }
+        ],
+        "title": "Cisco-IOS-XE-poe-oper:poe-oper-data/poe-switch",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 14,
+          "w": 3,
+          "x": 0,
+          "y": 48
+        },
+        "hiddenSeries": false,
+        "id": 11,
+        "interval": "10s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": true,
+          "hideEmpty": true,
+          "hideZero": true,
+          "max": true,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.5.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
         "targets": [
           {
-            "exemplar": true,
-            "expr": "docker_container_blkio_io_service_bytes_recursive_write{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "interval": "",
-            "legendFormat": "{{container_name}} - Write",
+            "expr": "(avg_over_time(openconfig_platform:components/component_source[$__interval])) ",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{ name }}",
             "refId": "A",
-            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
-          },
-          {
-            "exemplar": true,
-            "expr": "-docker_container_blkio_io_service_bytes_recursive_read{engine_host=\"$engine_host\",container_name=~\"$container_name\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{container_name}} - Read",
-            "refId": "B",
             "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
           }
         ],
-        "title": "Read & Write",
-        "type": "timeseries"
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Temperature",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "celsius",
+            "logBase": 1,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "aliasColors": {
+          "Processor free": "yellow",
+          "Processor used": "yellow"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "links": []
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 14,
+          "w": 3,
+          "x": 3,
+          "y": 48
+        },
+        "hiddenSeries": false,
+        "id": 19,
+        "interval": "10s",
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": true,
+          "hideZero": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "8.5.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "avg by (name)(Cisco_IOS_XE_poe_oper:poe_oper_data/poe_switch_consumed_poe_power{source=~\"$SOURCE\"})",
+            "format": "time_series",
+            "instant": false,
+            "intervalFactor": 1,
+            "legendFormat": "{{ name }} $col",
+            "refId": "A",
+            "datasource": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "Power",
+        "tooltip": {
+          "shared": true,
+          "sort": 2,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "watt",
+            "logBase": 1,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
       }
     ],
-    "refresh": false,
+    "refresh": "",
     "schemaVersion": 36,
     "style": "dark",
-    "tags": [
-      "Docker",
-      "Containers"
-    ],
+    "tags": [],
     "templating": {
       "list": [
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+          },
+          "definition": "label_values(source)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "source",
+          "multi": false,
+          "name": "SOURCE",
+          "options": [],
+          "query": {
+            "query": "label_values(source)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+          },
+          "definition": "label_values(name)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "name",
+          "multi": true,
+          "name": "NAME",
+          "options": [],
+          "query": {
+            "query": "label_values(name)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 3,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_CISCOLIVELOVESOTEL.CORP_METRICS}"
+          },
+          "definition": "label_values(vrf)",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "VRF",
+          "options": [],
+          "query": {
+            "query": "label_values(vrf)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 3,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
         {
           "current": {
             "selected": false,
@@ -2084,7 +3766,6 @@
           },
           "hide": 0,
           "includeAll": false,
-          "label": "Datasource",
           "multi": false,
           "name": "datasource",
           "options": [],
@@ -2094,50 +3775,6 @@
           "regex": "",
           "skipUrlSync": false,
           "type": "datasource"
-        },
-        {
-          "current": {},
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "definition": "label_values(docker_n_containers,engine_host)",
-          "hide": 0,
-          "includeAll": false,
-          "label": "Host ",
-          "multi": false,
-          "name": "engine_host",
-          "options": [],
-          "query": {
-            "query": "label_values(docker_n_containers,engine_host)",
-            "refId": "StandardVariableQuery"
-          },
-          "refresh": 2,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
-        },
-        {
-          "current": {},
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "definition": "label_values(docker_container_cpu_throttling_periods{engine_host=~\"$engine_host\"}, container_name)",
-          "hide": 0,
-          "includeAll": false,
-          "label": "Container Name ",
-          "multi": false,
-          "name": "container_name",
-          "options": [],
-          "query": {
-            "query": "label_values(docker_container_cpu_throttling_periods{engine_host=~\"$engine_host\"}, container_name)",
-            "refId": "StandardVariableQuery"
-          },
-          "refresh": 2,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
         }
       ]
     },
@@ -2145,10 +3782,23 @@
       "from": "now-6h",
       "to": "now"
     },
-    "timepicker": {},
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
     "timezone": "",
-    "title": "Part 2 - Docker Containers Metrics",
-    "uid": "5Wbud46hwzhpFeokC69j0Z",
-    "version": 7,
+    "title": "Part 2 - Cisco MDT Device Health Monitoring",
+    "uid": "yM8K90tSk",
+    "version": 14,
     "weekStart": ""
   }
