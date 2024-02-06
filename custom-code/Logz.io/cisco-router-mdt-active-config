@@ -5,6 +5,7 @@ telemetry ietf subscription 100
  stream yang-push
  update-policy periodic 2000
  receiver ip address 172.24.82.250 57100 protocol grpc-tcp
+ 
 telemetry ietf subscription 101
  encoding encode-kvgpb
  filter xpath /process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds

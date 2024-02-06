@@ -101,20 +101,6 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifAlias
               - name: ifDescr        
 
-#      ifHCOutOctets:
-#        description: "Total octets transmitted out of the interface"
-#        unit: "octets"
-#        sum:
-#          aggregation: cumulative
-#          monotonic: true
-#          value_type: int
-#        column_oids:
-#          - oid: "1.3.6.1.2.1.31.1.1.1.10"
-#            attributes:
-#              - name: ifIndex
-#              - name: ifName
-#              - name: ifAlias
-#              - name: ifDescr            
 
       ifOutOctets:
         description: "Total octets transmitted out of the interface"
@@ -268,37 +254,6 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifAlias
               - name: ifDescr     
 
-      snmpEngineTime:
-        description: "System Uptime"
-        unit: "Time"
-        sum:
-          aggregation: cumulative
-          monotonic: true
-          value_type: int
-        column_oids:
-          - oid: "1.3.6.1.6.3.10.2.1.3"    
-            attributes:
-              - name: ifIndex
-              - name: ifName
-              - name: ifAlias
-              - name: ifDescr     
-
-              
-
-#      ifHCOutUcastPkts:
-#        description: "Unicast packets requested to be transmitted"
-#        unit: "packets"
-#        sum:
-#          aggregation: cumulative
-#          monotonic: true
-#          value_type: int
-#        column_oids:
-#          - oid: "1.3.6.1.2.1.31.1.1.1.11"
-#            attributes:
-#              - name: ifIndex
-#              - name: ifName
-#              - name: ifAlias
-#              - name: ifDescr     
 
       ifInUcastPkts:
         description: "Unicast packets requested to be transmitted"
@@ -380,22 +335,6 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
               - name: ifAlias
               - name: ifDescr     
 
-
-
-#      ifHCInBroadcastPkts:
-#        description: "Packets delivered to a broadcast address"
-#        unit: "packets"
-#        sum:
-#          aggregation: cumulative
-#          monotonic: true
-#          value_type: int
-#        column_oids:
-#          - oid: "1.3.6.1.2.1.31.1.1.1.9"
-#            attributes:
-#              - name: ifIndex
-#              - name: ifName
-#              - name: ifAlias
-#              - name: ifDescr
 
   syslog:
     udp:
