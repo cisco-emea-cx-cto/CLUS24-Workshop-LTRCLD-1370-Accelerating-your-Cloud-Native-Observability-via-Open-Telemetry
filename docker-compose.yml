@@ -308,8 +308,8 @@ services:
         condition: service_started
       quoteservice:
         condition: service_started
-      recommendationservice:
-        condition: service_started
+#      recommendationservice:
+#        condition: service_started
       shippingservice:
         condition: service_started
       otelcol:
@@ -350,44 +350,44 @@ services:
         condition: service_started
       featureflagservice:
         condition: service_started
-      loadgenerator:
-        condition: service_started
+#      loadgenerator:
+#        condition: service_started
       jaeger:
         condition: service_started
       grafana:
         condition: service_started
 
   # Load Generator
-  loadgenerator:
-    image: ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
-    container_name: load-generator
-    build:
-      context: ./
-      dockerfile: ./src/loadgenerator/Dockerfile
-      cache_from:
-        - ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
-    deploy:
-      resources:
-        limits:
-          memory: 120M
-    restart: unless-stopped
-    ports:
-      - "${LOCUST_WEB_PORT}"
-    environment:
-      - LOCUST_WEB_PORT
-      - LOCUST_USERS
-      - LOCUST_HOST
-      - LOCUST_HEADLESS
-      - LOCUST_AUTOSTART
-      - OTEL_EXPORTER_OTLP_ENDPOINT
-      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
-      - OTEL_RESOURCE_ATTRIBUTES
-      - OTEL_SERVICE_NAME=loadgenerator
-      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-    depends_on:
-      frontend:
-        condition: service_started
-    logging: *logging
+#  loadgenerator:
+#    image: ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
+#    container_name: load-generator
+#    build:
+#      context: ./
+#      dockerfile: ./src/loadgenerator/Dockerfile
+#      cache_from:
+#        - ${IMAGE_NAME}:${IMAGE_VERSION}-loadgenerator
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 120M
+#    restart: unless-stopped
+#    ports:
+#      - "${LOCUST_WEB_PORT}"
+#    environment:
+#      - LOCUST_WEB_PORT
+#      - LOCUST_USERS
+#      - LOCUST_HOST
+#      - LOCUST_HEADLESS
+#      - LOCUST_AUTOSTART
+#      - OTEL_EXPORTER_OTLP_ENDPOINT
+#      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
+#      - OTEL_RESOURCE_ATTRIBUTES
+#      - OTEL_SERVICE_NAME=loadgenerator
+#      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+#    depends_on:
+ #     frontend:
+#        condition: service_started
+#    logging: *logging
 
   # Payment service
   paymentservice:
@@ -473,39 +473,39 @@ services:
     logging: *logging
 
   # Recommendation service
-  recommendationservice:
-    image: ${IMAGE_NAME}:${IMAGE_VERSION}-recommendationservice
-    container_name: recommendation-service
-    build:
-      context: ./
-      dockerfile: ./src/recommendationservice/Dockerfile
-      cache_from:
-        - ${IMAGE_NAME}:${IMAGE_VERSION}-recommendationservice
-    deploy:
-      resources:
-        limits:
-          memory: 500M               # This is high to enable supporting the recommendationCache feature flag use case
-    restart: unless-stopped
-    ports:
-      - "${RECOMMENDATION_SERVICE_PORT}"
-    environment:
-      - RECOMMENDATION_SERVICE_PORT
-      - PRODUCT_CATALOG_SERVICE_ADDR
-      - FEATURE_FLAG_GRPC_SERVICE_ADDR
-      - OTEL_PYTHON_LOG_CORRELATION=true
-      - OTEL_EXPORTER_OTLP_ENDPOINT
-      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
-      - OTEL_RESOURCE_ATTRIBUTES
-      - OTEL_SERVICE_NAME=recommendationservice
-      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-    depends_on:
-      featureflagservice:
-        condition: service_started
-      productcatalogservice:
-        condition: service_started
-      otelcol:
-        condition: service_started
-    logging: *logging
+#  recommendationservice:
+#    image: ${IMAGE_NAME}:${IMAGE_VERSION}-recommendationservice
+#    container_name: recommendation-service
+#    build:
+#      context: ./
+#      dockerfile: ./src/recommendationservice/Dockerfile
+#      cache_from:
+#        - ${IMAGE_NAME}:${IMAGE_VERSION}-recommendationservice
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 500M               # This is high to enable supporting the recommendationCache feature flag use case
+#    restart: unless-stopped
+#    ports:
+#      - "${RECOMMENDATION_SERVICE_PORT}"
+#    environment:
+#      - RECOMMENDATION_SERVICE_PORT
+#      - PRODUCT_CATALOG_SERVICE_ADDR
+#      - FEATURE_FLAG_GRPC_SERVICE_ADDR
+#      - OTEL_PYTHON_LOG_CORRELATION=true
+#      - OTEL_EXPORTER_OTLP_ENDPOINT
+##      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
+##      - OTEL_RESOURCE_ATTRIBUTES
+#      - OTEL_SERVICE_NAME=recommendationservice
+#      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+#    depends_on:
+#      featureflagservice:
+#        condition: service_started
+#      productcatalogservice:
+#        condition: service_started
+#      otelcol:
+#        condition: service_started
+#    logging: *logging
 
   # Shipping service
   shippingservice:
@@ -797,7 +797,7 @@ services:
       - emailservice
       - paymentservice
       - productcatalogservice
-      - recommendationservice
+#      - recommendationservice
       - shippingservice
       - quoteservice
 
@@ -847,8 +847,8 @@ services:
         condition: service_started
       productcatalogservice:
         condition: service_started
-      recommendationservice:
-        condition: service_started
+#      recommendationservice:
+#        condition: service_started
       shippingservice:
         condition: service_started
       quoteservice:
