@@ -8,6 +8,14 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=red)](https://github.com/open-telemetry/opentelemetry-demo/blob/main/LICENSE)
 [![Integration Tests](https://github.com/open-telemetry/opentelemetry-demo/actions/workflows/run-integration-tests.yml/badge.svg)](https://github.com/open-telemetry/opentelemetry-demo/actions/workflows/run-integration-tests.yml)
 
+## Accesss the Labs:
+
+Part 0 - https://www.notion.so/Part-0-Ubuntu-Prep-8d547a367c684708a1d4c7ffaefe6627?pvs=4
+Part 1 - https://www.notion.so/Part-1-introduction-to-OTel-collector-The-Astronomy-Demo-Shop-7c1bcb81332f43ac938fee01502d8e93?pvs=4
+Part 2 - https://www.notion.so/Part-2-Converging-infra-monitoring-and-observability-using-Opentelemetry-24462c8ccf4d4689934e11bb22689c46?pvs=4
+Part 3 - https://www.notion.so/Part-3-The-Power-of-Unified-Observability-External-Backends-47a715a58b4543cb9e3a924987a81184?pvs=4
+
+
 ## Welcome to the OpenTelemetry Astronomy Shop Demo
 
 This repository contains the OpenTelemetry Astronomy Shop, a microservice-based
