@@ -1,0 +1,455 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
+  
+  filelog/localhost_linux_system:
+    include:
+      - /var/log/*.log
+    include_file_path: true
+    operators:
+      - type: move
+        from: attributes["log.file.name"]
+        to: attributes["log_file_name"]
+      - type: move
+        from: attributes["log.file.path"]
+        to: attributes["log_file_path"]
+    attributes:
+      type: agent-linux
+
+  hostmetrics/localhost_linux_system:
+    root_path: /hostfs ## should we still use this ?     
+    collection_interval: 60s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      disk:
+      load:
+      filesystem:
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      network:
+      paging:
+      process:
+        exclude:
+          names: ['launcher']
+          match_type: strict
+        mute_process_name_error: true
+        mute_process_exe_error: true
+        mute_process_io_error: true
+        mute_process_user_error: true
+
+  snmp:
+    collection_interval: 60s
+    endpoint: udp://172.24.79.29:161
+    version: v2c
+    community: public
+    
+    resource_attributes:
+      ifIndex:
+        description: "A unique value for each interface"
+        oid: "1.3.6.1.2.1.2.2.1.1"
+      ifName:
+        description: "The name of the interface"
+        oid: "1.3.6.1.2.1.31.1.1.1.1"
+      ifAlias:
+        description: "The alias name of the interface"
+        oid: "1.3.6.1.2.1.31.1.1.1.18"
+      ifDescr:
+        description: "A textual description of the interface"
+        oid: "1.3.6.1.2.1.2.2.1.2"
+
+    attributes:
+      ifIndex:
+        oid: "1.3.6.1.2.1.2.2.1.1"
+      ifName:
+        oid: "1.3.6.1.2.1.31.1.1.1.1"
+      ifAlias:
+        oid: "1.3.6.1.2.1.31.1.1.1.18"
+      ifDescr:
+        oid: "1.3.6.1.2.1.2.2.1.2"
+        
+    metrics:
+
+      # Admin Status
+      ifAdminStatus:
+        description: "The desired state of the interface"
+        unit: "1"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.7"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr
+
+      # Oper Status
+      ifOperStatus:
+        description: "Interface Oper Status"
+        unit: "1"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.8"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr        
+
+
+      ifOutOctets:
+        description: "Total octets transmitted out of the interface"
+        unit: "octets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.16"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      # Errors
+      ifInErrors:
+        description: "Inbound Errors"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.14"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr              
+      
+      ifOutErrors:
+        description: "Outbound Errors"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.20"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr    
+
+      ifInDiscards:
+        description: "Inbound Discards"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.13"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr    
+
+      ifOutDiscards:
+        description: "Outbound Discards"
+        unit: "1"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.19"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr    
+
+
+      ifConnectorPresent:
+        description: "True if the interface sublayer has a physical connector"
+        unit: "boolean"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.17"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr        
+
+      ifInMulticastPkts:
+        description: "Packets delivered to a multicast address"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.4"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr        
+
+
+      ifInOctets:   
+        description: "Total octets received on the interface"
+        unit: "octets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.10"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr      
+
+
+      ifOutBroadcastPkts:
+        description: "Broadcast packets requested to be transmitted"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: " 1.3.6.1.2.1.31.1.1.1.5"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      ifOutMulticastPkts:
+        description: "Multicast packets requested to be transmitted"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.2"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      ifInUcastPkts:
+        description: "Unicast packets requested to be transmitted"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.11"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      ifOutUcastPkts:
+        description: "Unicast packets requested to be transmitted"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.17"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      ifHighSpeed:
+        description: "Current bandwidth in megabits per second"
+        unit: "Mbps"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.15"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+      ifMtu:
+        unit: "MTU"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.4"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr              
+
+      ifType:
+        unit: "InterfaceType"
+        gauge:
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.2.2.1.3"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr       
+
+      ifInBroadcastPkts:
+        description: "Packets delivered to a broadcast address at this sub-layer"
+        unit: "packets"
+        sum:
+          aggregation: cumulative
+          monotonic: true
+          value_type: int
+        column_oids:
+          - oid: "1.3.6.1.2.1.31.1.1.1.3"
+            attributes:
+              - name: ifIndex
+              - name: ifName
+              - name: ifAlias
+              - name: ifDescr     
+
+
+  syslog:
+    udp:
+      listen_address: "0.0.0.0:1514"
+    protocol: rfc5424
+    location: UTC
+    operators:
+      - type: move
+        from: attributes.message
+        to: body
+      - type: add
+        field: attributes.log.source
+        value: syslog    
+  otlp:
+    protocols:
+      grpc:
+        include_metadata: true
+        endpoint: 0.0.0.0:4317
+      http:
+        include_metadata: true
+        endpoint: 0.0.0.0:4318
+        cors:
+          allowed_origins:
+            - "http://*"
+            - "https://*"
+  httpcheck/frontendproxy:
+    targets:
+      - endpoint: http://frontendproxy:${env:ENVOY_PORT}
+
+
+exporters:
+  debug:
+    verbosity: detailed
+    sampling_initial: 5
+    sampling_thereafter: 200
+  
+  otlp:
+    sending_queue:
+      enabled: true
+    endpoint: "jaeger:4317"
+    tls:
+      insecure: true
+  otlp/logs:
+    endpoint: "dataprepper:21892"
+    tls:
+      insecure: true
+  otlphttp/prometheus:
+    endpoint: "http://prometheus:9090/api/v1/otlp"
+    tls:
+      insecure: true
+
+processors:
+  resourcedetection/system:
+    detectors: ["system"]
+    system:
+      hostname_sources: ["os"]
+  resource/agent:
+    attributes:
+      - key: logzio_agent_version
+        value: v1.1.21
+        action: upsert
+  filter:
+    metrics:
+      include:
+        match_type: strict
+        metric_names: ["system.cpu.time", "system.cpu.load_average.1m", "system.cpu.load_average.5m", "system.cpu.load_average.15m", "system.cpu.utilization", "system.memory.usage", "system.memory.utilization", "system.filesystem.usage", "system.disk.io", "system.disk.io_time", "system.disk.operation_time", "system.network.connections", "system.network.io", "system.network.packets", "system.network.errors", "process.cpu.time", "process.memory.usage", "process.disk.io", "process.memory.usage", "process.memory.virtual"]
+  batch:
+    timeout: 10s
+    send_batch_size: 10000
+    send_batch_max_size: 11000
+  filter/ottl: ###does this overlap with the other filter?
+    error_mode: ignore
+    metrics:
+      metric:
+        # FIXME: remove when a Metrics View is implemented in the checkout and productcatalog components
+        # or when this issue is resolved: https://github.com/open-telemetry/opentelemetry-go-contrib/issues/3071
+        - 'name == "rpc.server.duration"'
+  transform:
+    metric_statements:
+      - context: metric
+        statements:
+          # FIXME: remove when this issue is resolved: https://github.com/open-telemetry/opentelemetry-java/issues/4834
+          - set(description, "") where name == "queueSize"
+          # FIXME: remove when this issue is resolved: https://github.com/open-telemetry/opentelemetry-python-contrib/issues/1958
+          - set(description, "") where name == "http.client.duration"
+
+connectors:
+  spanmetrics:
+
+service:
+  extensions: [health_check, zpages]
+  telemetry:
+    logs:
+      level: "error"
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
+
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch, resourcedetection/system]
+      exporters: [otlp, debug, spanmetrics]
+    metrics:
+      receivers: [httpcheck/frontendproxy, otlp, spanmetrics, snmp, hostmetrics/localhost_linux_system] 
+      processors: [filter/ottl, transform, batch, resourcedetection/system, resource/agent]
+      exporters: [otlphttp/prometheus, debug]
+    logs:
+      receivers: [otlp, syslog, filelog/localhost_linux_system]
+      processors: [batch, resourcedetection/system]
+      exporters: [otlp/logs, debug]
+
+
+extensions:
+  health_check:
+  zpages:
