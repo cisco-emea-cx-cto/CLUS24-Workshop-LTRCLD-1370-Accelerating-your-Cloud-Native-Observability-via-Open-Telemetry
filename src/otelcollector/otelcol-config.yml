@@ -44,7 +44,7 @@ receivers: # didnt work for me ${file:otelcol-hostmetrics.yml}
 
   snmp:
     collection_interval: 60s
-    endpoint: udp://172.24.79.29:161
+    endpoint: udp://198.18.132.151:161
     version: v2c
     community: public
     
