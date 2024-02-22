@@ -1,5 +1,33 @@
 <!-- markdownlint-disable-next-line -->
-# <img src="https://opentelemetry.io/img/logos/opentelemetry-logo-nav.png" alt="OTel logo" width="45"> OpenTelemetry Demo
+# <img src="https://file.notion.so/f/f/af0a3210-17d9-4809-b848-37c113545a2b/381fe325-6642-4e46-a41f-1133a7b9a4b2/Untitled.png?id=2e05f706-d692-41dd-898e-6930cc5dccf0&table=block&spaceId=af0a3210-17d9-4809-b848-37c113545a2b&expirationTimestamp=1708704000000&signature=r37hzwTx6KgyHscTA3pXdoy4_gf9f3khs7qilmeBxes&downloadName=Untitled.png" alt="CiscoLive 2024 - LTRCLD-1370"> Accelerating Your Cloud Native Observability via Open Telemetry - CiscoLive 2024 - LTRCLD-1370
+
+
+# About this workshop
+This workshop will share the tools of the trade to help you build and modernize observability stacks using Cisco platforms and architectures. Attendees will learn about tooling and how open telemetry works. Furthermore, they will learn how to create and deploy setups in their labs to send telemetry data to central observability platforms.
+
+## Goals of workshop
+1. foundational stack to be used by network operators
+2. educate on OTEL and the value of cisco in their OTEL journey 
+3. use CN tools as a network operator 
+4. Experiment hands-on with OTEL operations and configuration with a variety of CN tools
+5. learn about the power of backend systems with [Logz.io](http://Logz.io) as an example
+
+## Accesss the Labs:
+- [Part 0 - Environment Prep](https://ises.notion.site/Part-0-Ubuntu-Prep-8d547a367c684708a1d4c7ffaefe6627?pvs=4)
+- [Part 1 - Introduction-to-OTel-collector-The-Astronomy-Demo-Shop](https://ises.notion.site/Part-1-introduction-to-OTel-collector-The-Astronomy-Demo-Shop-7c1bcb81332f43ac938fee01502d8e93?pvs=4)
+- [Part 2 - Converging-infra-monitoring-and-observability-using-Opentelemetry](https://ises.notion.site/Part-2-Converging-infra-monitoring-and-observability-using-Opentelemetry-24462c8ccf4d4689934e11bb22689c46?pvs=4)
+- [Part 3 - The-Power-of-Unified-Observability-External-Backends-Using-Logz.io](https://ises.notion.site/Part-3-The-Power-of-Unified-Observability-External-Backends-47a715a58b4543cb9e3a924987a81184?pvs=4)
+
+## Contributing
+Cisco CX CTO Office EMEA 
+- [Ariel Leza](https://github.com/ArielLeza), Cisco CX CTO Office EMEA
+- [Josh Halley](https://github.com/joshhalley), Cisco CX CTO Office EMEA
+- [Dotan Horovits](https://github.com/horovits), Logz.io
+
+Thanks a lot to the logz.io team for their support and for the OpenTelemetry Astronomy Shop Demo contributors 
+
+<!-- markdownlint-disable-next-line -->
+# <img src="https://opentelemetry.io/img/logos/opentelemetry-logo-nav.png" alt="OTel logo" width="45"> OpenTelemetry Demo (Forked Repo)
 
 [![Slack](https://img.shields.io/badge/slack-@cncf/otel/demo-brightgreen.svg?logo=slack)](https://cloud-native.slack.com/archives/C03B4CWV4DA)
 [![Version](https://img.shields.io/github/v/release/open-telemetry/opentelemetry-demo?color=blueviolet)](https://github.com/open-telemetry/opentelemetry-demo/releases)
@@ -7,13 +35,6 @@
 [![Downloads](https://img.shields.io/docker/pulls/otel/demo)](https://hub.docker.com/r/otel/demo)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?color=red)](https://github.com/open-telemetry/opentelemetry-demo/blob/main/LICENSE)
 [![Integration Tests](https://github.com/open-telemetry/opentelemetry-demo/actions/workflows/run-integration-tests.yml/badge.svg)](https://github.com/open-telemetry/opentelemetry-demo/actions/workflows/run-integration-tests.yml)
-
-## Accesss the Labs:
-
-Part 0 - https://www.notion.so/Part-0-Ubuntu-Prep-8d547a367c684708a1d4c7ffaefe6627?pvs=4
-Part 1 - https://www.notion.so/Part-1-introduction-to-OTel-collector-The-Astronomy-Demo-Shop-7c1bcb81332f43ac938fee01502d8e93?pvs=4
-Part 2 - https://www.notion.so/Part-2-Converging-infra-monitoring-and-observability-using-Opentelemetry-24462c8ccf4d4689934e11bb22689c46?pvs=4
-Part 3 - https://www.notion.so/Part-3-The-Power-of-Unified-Observability-External-Backends-47a715a58b4543cb9e3a924987a81184?pvs=4
 
 
 ## Welcome to the OpenTelemetry Astronomy Shop Demo
