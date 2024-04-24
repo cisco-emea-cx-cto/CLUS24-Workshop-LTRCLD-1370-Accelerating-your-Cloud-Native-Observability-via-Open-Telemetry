@@ -13,10 +13,10 @@ This workshop will share the tools of the trade to help you build and modernize 
 5. learn about the power of backend systems with [Logz.io](http://Logz.io) as an example
 
 ## Accesss the Labs:
-- [Part 0 - Environment Prep](https://ises.notion.site/Part-0-Ubuntu-Prep-8d547a367c684708a1d4c7ffaefe6627?pvs=4)
-- [Part 1 - Introduction-to-OTel-collector-The-Astronomy-Demo-Shop](https://ises.notion.site/Part-1-introduction-to-OTel-collector-The-Astronomy-Demo-Shop-7c1bcb81332f43ac938fee01502d8e93?pvs=4)
-- [Part 2 - Converging-infra-monitoring-and-observability-using-Opentelemetry](https://ises.notion.site/Part-2-Converging-infra-monitoring-and-observability-using-Opentelemetry-24462c8ccf4d4689934e11bb22689c46?pvs=4)
-- [Part 3 - The-Power-of-Unified-Observability-External-Backends-Using-Logz.io](https://ises.notion.site/Part-3-The-Power-of-Unified-Observability-External-Backends-47a715a58b4543cb9e3a924987a81184?pvs=4)
+- [Part 0 - Environment Prep](https://arielleza.notion.site/OpenTelemetry-Workshop-Playbook-WIP-43e635436ea84e8ea2d6fee5a0d3ee90?pvs=4)
+- [Part 1 - Introduction-to-OTel-collector-The-Astronomy-Demo-Shop](https://arielleza.notion.site/Part-1-introduction-to-OTel-collector-The-Astronomy-Demo-Shop-c35c2d8975464cf9b3fc0de7513b8e0a?pvs=4)
+- [Part 2 - Converging-infra-monitoring-and-observability-using-Opentelemetry](https://arielleza.notion.site/Part-2-Converging-infra-monitoring-and-observability-using-Opentelemetry-20478ef345074b2bafcd2c8eb4286c22?pvs=4)
+- [Part 3 - The-Power-of-Unified-Observability-External-Backends-Using-Logz.io](https://arielleza.notion.site/Part-3-The-Power-of-Unified-Observability-External-Backends-83f4db7f516a435fb73994c743e5570f?pvs=4)
 
 ## Contributing
 Cisco CX CTO Office EMEA 
